@@ -1,12 +1,14 @@
+import Navbar from "@/components/shared/navbar/Navbar";
+import Container from "@/components/UI/Container";
 import { TChildren } from "@/types/global";
 import React from "react";
 
 const CommonLayout = ({ children }: TChildren) => {
   return (
-    <div>
-      <h1>Common Layout</h1>
+    <Container>
+      <Navbar />
       {children}
-    </div>
+    </Container>
   );
 };
 

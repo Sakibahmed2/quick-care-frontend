@@ -7,3 +7,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+@layer components {
+  .btn {
+    @apply font-semibold py-2 px-6 rounded-sm;
+  }
+  .btn-primary {
+    @apply bg-primary/90 hover:bg-primary text-white transition-all ease-in-out;
+  }
+}
