@@ -1,4 +1,5 @@
 import doctorGroup from "@/assets/doc-header-img.svg";
+import { MoveRight } from "lucide-react";
 import Image from "next/image";
 
 const HeroSection = () => {
@@ -11,7 +12,12 @@ const HeroSection = () => {
         <p className="text-slate-200 mt-2 mb-4">
           Book an appointment with the best doctors in your area
         </p>
-        <button className="btn bg-white rounded-full">Book appointment</button>
+        <button className="btn bg-white rounded-full flex items-center gap-2">
+          Book appointment
+          <span>
+            <MoveRight />
+          </span>
+        </button>
       </div>
       <div className="md:absolute bottom-0 -right-24">
         <Image src={doctorGroup} height={1000} width={700} alt="Doctor Group" />
