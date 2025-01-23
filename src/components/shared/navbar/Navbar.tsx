@@ -27,7 +27,7 @@ const Navbar = () => {
         {/* img section */}
         <div className="flex items-center gap-2">
           <Image src={logo} height={48} width={48} alt="logo" />
-          <h1 className="text-3xl font-bold ">
+          <h1 className="text-3xl font-semibold">
             Quick<span className="text-primary">Care</span>
           </h1>
         </div>
