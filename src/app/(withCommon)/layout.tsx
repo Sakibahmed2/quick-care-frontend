@@ -1,14 +1,14 @@
+import Footer from "@/components/shared/footer/Footer";
 import Navbar from "@/components/shared/navbar/Navbar";
-import Container from "@/components/UI/Container";
 import { TChildren } from "@/types/global";
-import React from "react";
 
 const CommonLayout = ({ children }: TChildren) => {
   return (
-    <Container>
+    <div>
       <Navbar />
       {children}
-    </Container>
+      <Footer />
+    </div>
   );
 };
 
