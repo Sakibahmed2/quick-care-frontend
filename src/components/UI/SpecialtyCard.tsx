@@ -7,7 +7,7 @@ const SpecialtyCard = ({ specialty }: { specialty: TSpecialty }) => {
 
   return (
     <div className="flex flex-col items-center gap-1 ">
-      <div className="bg-gradient-to-t from-slate-200 to-violet-400  p-5 rounded-full">
+      <div className="bg-gradient-to-t from-primary/10 to-primary  p-5 rounded-full">
         <Image src={image} height={64} width={64} alt={name} />
       </div>
       <p>{name}</p>

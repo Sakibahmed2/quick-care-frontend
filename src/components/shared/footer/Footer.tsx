@@ -6,7 +6,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 
 const Footer = () => {
   return (
-    <div className="bg-slate-50 pt-10">
+    <div className="bg-slate-50 pt-10 mt-10">
       <Container>
         <div className="md:flex justify-between items-start gap-8 space-y-5 md:space-y-0">
           <div>

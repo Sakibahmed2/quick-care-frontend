@@ -11,7 +11,8 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primary: "#f2437a",
+        // Todo: Change on future
+        primary: "#5F6FFF",
       },
     },
   },

@@ -4,8 +4,6 @@ import Image from "next/image";
 import React from "react";
 
 const DoctorCard = ({ doctor }: { doctor: any }) => {
-  console.log(doctor);
-
   const { name, img, specialty, experience, isAvailable } = doctor || {};
 
   return (

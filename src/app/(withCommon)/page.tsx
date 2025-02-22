@@ -12,9 +12,9 @@ const HomePage = () => {
 
       <Specialty />
 
-      <HowItWorks />
-
       <TopDoctor />
+
+      <HowItWorks />
     </Container>
   );
 };
