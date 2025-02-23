@@ -8,6 +8,14 @@
   box-sizing: border-box;
 }
 
+input {
+  @apply py-2 px-4 rounded-md border border-gray-300;
+}
+
+input:focus {
+  @apply outline-none border-primary;
+}
+
 @layer components {
   .btn {
     @apply py-3 px-6 rounded-sm;

@@ -1,6 +1,7 @@
 import logo from "@/assets/logo.png";
 import Container from "@/components/UI/Container";
 import Image from "next/image";
+import Link from "next/link";
 
 const items = [
   {
@@ -52,7 +53,9 @@ const Navbar = () => {
 
           {/* button section */}
           <div className="flex items-center gap-4">
-            <button className="btn-small btn-primary ">Login</button>
+            <Link href={"/login"}>
+              <button className="btn-small btn-primary">Login</button>
+            </Link>
           </div>
         </div>
       </div>
