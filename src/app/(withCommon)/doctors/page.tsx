@@ -7,6 +7,7 @@ import DoctorCard from "@/components/UI/DoctorCard";
 
 const doctors = [
   {
+    id: "1",
     name: "Dr. Emily Carter",
     img: doctor1,
     specialty: "Cardiologist",
@@ -17,6 +18,7 @@ const doctors = [
     isAvailable: true,
   },
   {
+    id: "2",
     name: "Dr. Michael Johnson",
     img: doctor2,
     specialty: "Dermatologist",
@@ -27,6 +29,7 @@ const doctors = [
     isAvailable: false,
   },
   {
+    id: "3",
     name: "Dr. Sarah Williams",
     img: doctor2,
     specialty: "Pediatrician",
@@ -37,6 +40,7 @@ const doctors = [
     isAvailable: true,
   },
   {
+    id: "4",
     name: "Dr. James Anderson",
     img: doctor1,
     specialty: "Orthopedic Surgeon",
