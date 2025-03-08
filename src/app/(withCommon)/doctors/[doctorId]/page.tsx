@@ -59,6 +59,8 @@ const SingleDoctorPage = async ({
 }) => {
   const doctorId = (await params).doctorId;
 
+  console.log((await params).doctorId);
+
   const doctor = doctors.find((doctor) => doctor.id === doctorId);
 
   if (!doctor) {
