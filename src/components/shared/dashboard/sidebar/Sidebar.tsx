@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 import { sidebarItems } from "@/utils/sidebarItems";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,7 +9,7 @@ const Sidebar = () => {
   const pathName = usePathname();
 
   return (
-    <div className="bg-gray-50 border-r h-screen flex flex-col gap-2 mt-2">
+    <div className="bg-gray-50 border-r h-screen flex flex-col gap-2 pt-2">
       {sidebarItems("admin").map((item, idx) => {
         return (
           <Link

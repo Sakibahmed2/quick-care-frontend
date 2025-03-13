@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/cn";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

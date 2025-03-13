@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { Poppins, Outfit } from "next/font/google";
 import "./globals.css";
+import ThemeProvider from "@/lib/ThemeProvider";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -24,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.className} antialiased`}>{children}</body>
     </html>
   );

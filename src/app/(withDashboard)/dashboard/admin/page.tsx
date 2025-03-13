@@ -1,7 +1,15 @@
 "use client";
 
+import { Badge } from "@/components/UI/badge";
 import StatisticsCard from "@/components/UI/StatisticsCard";
-import { Table, TableProps, Tag } from "antd";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/UI/table";
 import {
   BriefcaseMedical,
   CalendarDays,
@@ -32,48 +40,7 @@ const statistics = [
   },
 ];
 
-interface DataType {
-  id: number;
-  patient: string;
-  doctor: string;
-  date: string;
-  time: string;
-  status: string;
-}
-
 const AdminDashboard = () => {
-  const columns: TableProps<DataType>["columns"] = [
-    {
-      title: "Patient",
-      dataIndex: "patient",
-      key: "patient",
-      render: (text) => <a>{text}</a>,
-    },
-    {
-      title: "Doctor",
-      dataIndex: "doctor",
-      key: "doctor",
-    },
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-      title: "Time",
-      dataIndex: "time",
-      key: "time",
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      render: (text) => (
-        <Tag color={text === "Approved" ? "green" : "red"}>{text}</Tag>
-      ),
-    },
-  ];
-
   const data = [
     {
       id: 1,
@@ -126,14 +93,34 @@ const AdminDashboard = () => {
       </div>
 
       <div className="mt-8">
-        <div className="p-4 rounded-lg shadow">
-          <Table<DataType>
-            columns={columns}
-            dataSource={data}
-            rowKey={"id"}
-            pagination={false}
-          />
-        </div>
+        <Table>
+          <TableHeader className="rounded-md">
+            <TableRow className="overflow-hidden rounded-md">
+              <TableHead>Patient</TableHead>
+              <TableHead>Doctor</TableHead>
+              <TableHead>Date</TableHead>
+              <TableHead>Time</TableHead>
+              <TableHead>Status</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.map((item, idx) => (
+              <TableRow key={idx}>
+                <TableCell>{item.patient}</TableCell>
+                <TableCell>{item.doctor}</TableCell>
+                <TableCell>{item.date}</TableCell>
+                <TableCell>{item.time}</TableCell>
+                <TableCell className="">
+                  <Badge
+                    variant={item.status === "Approved" ? "success" : "danger"}
+                  >
+                    {item.status}
+                  </Badge>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </div>
   );
