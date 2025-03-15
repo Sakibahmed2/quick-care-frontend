@@ -20,22 +20,22 @@ import {
 const statistics = [
   {
     title: "Total doctors",
-    count: 10,
+    value: 10,
     icon: <BriefcaseMedical size={52} />,
   },
   {
     title: "Total appointments",
-    count: 10,
+    value: 10,
     icon: <CalendarDays size={52} />,
   },
   {
     title: "Total patients",
-    count: 10,
+    value: 10,
     icon: <Hospital size={52} />,
   },
   {
     title: "Total transactions",
-    count: "$1000",
+    value: "$1000",
     icon: <WalletCards size={52} />,
   },
 ];
