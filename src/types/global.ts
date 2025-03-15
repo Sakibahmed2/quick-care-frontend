@@ -9,3 +9,8 @@ export type TSpecialty = {
   name: string;
   image: StaticImageData;
 };
+
+export type TModalComponentsProps = {
+  isDialogOpen: boolean;
+  setIsDialogOpen: (isOpen: boolean) => void;
+};

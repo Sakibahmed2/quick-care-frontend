@@ -1,5 +1,6 @@
 "use client";
 
+import CreateScheduleModal from "@/components/dashboard/doctor/schedule/CreateScheduleModal";
 import { Badge } from "@/components/UI/badge";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "@/components/UI/button";
@@ -50,6 +51,7 @@ const doctorSchedules = [
 
 const DoctorSchedulesPage = () => {
   const [searchParam, setSearchParam] = useState("");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
     <div>
@@ -62,7 +64,7 @@ const DoctorSchedulesPage = () => {
           </p>
         </div>
 
-        <Button size={"lg"}>
+        <Button onClick={() => setIsDialogOpen(true)} size={"lg"}>
           <SquarePlus size={24} />
           Add schedules{" "}
         </Button>
@@ -125,6 +127,13 @@ const DoctorSchedulesPage = () => {
           </TableBody>
         </Table>
       </div>
+
+      {/*  Create Schedule modal  */}
+
+      <CreateScheduleModal
+        isDialogOpen={isDialogOpen}
+        setIsDialogOpen={setIsDialogOpen}
+      />
     </div>
   );
 };
