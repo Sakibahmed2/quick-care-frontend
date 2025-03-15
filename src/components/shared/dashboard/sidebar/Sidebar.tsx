@@ -10,7 +10,7 @@ const Sidebar = () => {
 
   return (
     <div className="bg-gray-50 border-r h-screen flex flex-col gap-2 pt-2">
-      {sidebarItems("admin").map((item, idx) => {
+      {sidebarItems("doctor").map((item, idx) => {
         return (
           <Link
             href={`/dashboard/${item.path}`}
