@@ -10,7 +10,7 @@ import {
 
 const HowItWorks = () => {
   return (
-    <div className="bg-slate-50 md:flex items-center md:w-full pt-10">
+    <div className=" md:flex items-center md:w-full pt-10 backdrop-blur-md border rounded-2xl">
       <div className="md:w-1/2">
         <Image
           src={doctorLookImg}

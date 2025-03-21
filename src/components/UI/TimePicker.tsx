@@ -1,134 +1,170 @@
-"use client";
+"use client"; // Required for client-side interactivity
 
-import * as React from "react";
-import { format } from "date-fns";
-import { cn } from "@/lib/cn";
-import { Button } from "@/components/UI/button";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/UI/popover";
-import { ScrollArea, ScrollBar } from "@/components/UI/scroll-area";
-import { ClockIcon } from "lucide-react"; // Changed from CalendarIcon to ClockIcon
+import { useState } from "react";
 
 interface TimePickerProps {
-  value: Date | undefined;
-  onChange: (date: Date | undefined) => void;
-  placeholder?: string;
+  value: string;
+  onChange: (time: string) => void;
 }
 
-export function TimePicker({ value, onChange, placeholder }: TimePickerProps) {
-  const [isOpen, setIsOpen] = React.useState(false);
+export const TimePicker = ({ value, onChange }: TimePickerProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedHour, setSelectedHour] = useState<string>("");
+  const [selectedMinute, setSelectedMinute] = useState<string>("");
+  const [selectedAmPm, setSelectedAmPm] = useState<string>("AM");
 
-  const hours = Array.from({ length: 12 }, (_, i) => i + 1); // Hours from 1 to 12
-  const minutes = Array.from({ length: 12 }, (_, i) => i * 5); // Minutes in 5-minute intervals
+  const hours = Array.from({ length: 12 }, (_, i) =>
+    (i + 1).toString().padStart(2, "0")
+  );
+  const minutes = Array.from({ length: 12 }, (_, i) =>
+    (i * 5).toString().padStart(2, "0")
+  );
 
-  const handleTimeChange = (
-    type: "hour" | "minute" | "ampm",
-    value: string
-  ) => {
-    const newDate = value ? new Date(value) : new Date(); // Use the selected date or current date
-    if (type === "hour") {
-      newDate.setHours(
-        (parseInt(value) % 12) + (newDate.getHours() >= 12 ? 12 : 0)
-      );
-    } else if (type === "minute") {
-      newDate.setMinutes(parseInt(value));
-    } else if (type === "ampm") {
-      const currentHours = newDate.getHours();
-      newDate.setHours(value === "PM" ? currentHours + 12 : currentHours - 12);
+  const handleHourChange = (hour: string) => {
+    setSelectedHour(hour);
+    updateTime(hour, selectedMinute, selectedAmPm);
+  };
+
+  const handleMinuteChange = (minute: string) => {
+    setSelectedMinute(minute);
+    updateTime(selectedHour, minute, selectedAmPm);
+  };
+
+  const handleAmPmChange = (amPm: string) => {
+    setSelectedAmPm(amPm);
+    updateTime(selectedHour, selectedMinute, amPm);
+  };
+
+  const updateTime = (hour: string, minute: string, amPm: string) => {
+    if (hour && minute && amPm) {
+      const time = `${hour}:${minute} ${amPm}`;
+      onChange(time);
     }
-    onChange(newDate);
   };
 
   return (
-    <Popover open={isOpen} onOpenChange={setIsOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          className={cn(
-            "w-full justify-start text-left font-normal",
-            !value && "text-muted-foreground"
-          )}
-        >
-          <ClockIcon className="mr-2 h-4 w-4" /> {/* Changed to ClockIcon */}
-          {value ? (
-            format(value, "hh:mm aa") // Display only time
-          ) : (
-            <span>{placeholder || "Select time"}</span> // Placeholder for time
-          )}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0">
-        <div className="flex flex-col sm:flex-row sm:h-[300px] divide-y sm:divide-y-0 sm:divide-x">
-          {/* Hours Section */}
-          <ScrollArea className="w-64 sm:w-auto">
-            <div className="flex sm:flex-col p-2">
-              {hours.reverse().map((hour) => (
-                <Button
-                  key={hour}
-                  size="icon"
-                  variant={
-                    value && value.getHours() % 12 === hour % 12
-                      ? "default"
-                      : "ghost"
-                  }
-                  className="sm:w-full shrink-0 aspect-square"
-                  onClick={() => handleTimeChange("hour", hour.toString())}
-                >
-                  {hour}
-                </Button>
-              ))}
-            </div>
-            <ScrollBar orientation="horizontal" className="sm:hidden" />
-          </ScrollArea>
+    <div className="max-w-32">
+      <div className="relative w-full">
+        <input
+          type="text"
+          className="py-2.5 sm:py-3 ps-4 pe-12 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:placeholder-neutral-400 dark:focus:ring-neutral-600"
+          placeholder="hh:mm aa"
+          value={value}
+          readOnly
+          onClick={() => setIsOpen(!isOpen)}
+        />
 
-          {/* Minutes Section */}
-          <ScrollArea className="w-64 sm:w-auto">
-            <div className="flex sm:flex-col p-2">
-              {minutes.map((minute) => (
-                <Button
-                  key={minute}
-                  size="icon"
-                  variant={
-                    value && value.getMinutes() === minute ? "default" : "ghost"
-                  }
-                  className="sm:w-full shrink-0 aspect-square"
-                  onClick={() => handleTimeChange("minute", minute.toString())}
-                >
-                  {minute.toString().padStart(2, "0")}{" "}
-                  {/* Ensure 2-digit format */}
-                </Button>
-              ))}
-            </div>
-            <ScrollBar orientation="horizontal" className="sm:hidden" />
-          </ScrollArea>
+        <div className="absolute inset-y-0 end-0 flex items-center pe-3">
+          <div className="hs-dropdown [--auto-close:inside] relative inline-flex">
+            <button
+              type="button"
+              className="hs-dropdown-toggle size-7 shrink-0 inline-flex justify-center items-center rounded-full bg-white text-gray-500 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+              aria-label="Dropdown"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <span className="sr-only">Dropdown</span>
+              <svg
+                className="shrink-0 size-4"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </button>
 
-          {/* AM/PM Section */}
-          <ScrollArea className="">
-            <div className="flex sm:flex-col p-2">
-              {["AM", "PM"].map((ampm) => (
-                <Button
-                  key={ampm}
-                  size="icon"
-                  variant={
-                    value &&
-                    ((ampm === "AM" && value.getHours() < 12) ||
-                      (ampm === "PM" && value.getHours() >= 12))
-                      ? "default"
-                      : "ghost"
-                  }
-                  className="sm:w-full shrink-0 aspect-square"
-                  onClick={() => handleTimeChange("ampm", ampm)}
-                >
-                  {ampm}
-                </Button>
-              ))}
-            </div>
-          </ScrollArea>
+            {isOpen && (
+              <div className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 min-w-30 bg-white border border-gray-200 shadow-xl rounded-lg mt-2 dark:bg-neutral-800 dark:border-neutral-700 dark:divide-neutral-700 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full">
+                <div className="flex flex-row divide-x divide-gray-200 dark:divide-neutral-700">
+                  {/* Hours */}
+                  <div className="p-1 max-h-56 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-white [&::-webkit-scrollbar-thumb]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-800 dark:hover:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
+                    {hours.map((hour) => (
+                      <button
+                        key={hour}
+                        className={`group relative flex justify-center items-center p-1.5 w-10 text-center text-sm text-gray-800 cursor-pointer rounded-md hover:bg-gray-100 hover:text-gray-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:hover:text-neutral-200 ${
+                          selectedHour === hour
+                            ? "bg-blue-600 text-white dark:bg-blue-500"
+                            : ""
+                        }`}
+                        onClick={() => handleHourChange(hour)}
+                      >
+                        {hour}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Minutes */}
+                  <div className="p-1 max-h-56 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-white [&::-webkit-scrollbar-thumb]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-800 dark:hover:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
+                    {minutes.map((minute) => (
+                      <button
+                        key={minute}
+                        className={`group relative flex justify-center items-center p-1.5 w-10 text-center text-sm text-gray-800 cursor-pointer rounded-md hover:bg-gray-100 hover:text-gray-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:hover:text-neutral-200 ${
+                          selectedMinute === minute
+                            ? "bg-blue-600 text-white dark:bg-blue-500"
+                            : ""
+                        }`}
+                        onClick={() => handleMinuteChange(minute)}
+                      >
+                        {minute}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* AM/PM */}
+                  <div className="p-1 max-h-56 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-white [&::-webkit-scrollbar-thumb]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-800 dark:hover:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
+                    {["AM", "PM"].map((amPm) => (
+                      <button
+                        key={amPm}
+                        className={`group relative flex justify-center items-center p-1.5 w-10 text-center text-sm text-gray-800 cursor-pointer rounded-md hover:bg-gray-100 hover:text-gray-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:hover:text-neutral-200 ${
+                          selectedAmPm === amPm
+                            ? "bg-blue-600 text-white dark:bg-blue-500"
+                            : ""
+                        }`}
+                        onClick={() => handleAmPmChange(amPm)}
+                      >
+                        {amPm}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Footer */}
+                <div className="py-2 px-3 flex flex-wrap justify-between items-center gap-2 border-t border-gray-200 dark:border-neutral-700">
+                  <button
+                    type="button"
+                    className="text-[13px] font-medium rounded-md bg-white text-blue-600 hover:text-blue-700 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:text-blue-700 dark:bg-neutral-800 dark:text-blue-500 dark:hover:text-blue-600 dark:focus:text-blue-600"
+                    onClick={() => {
+                      const now = new Date();
+                      const hour = now.getHours() % 12 || 12;
+                      const minute = now.getMinutes();
+                      const amPm = now.getHours() >= 12 ? "PM" : "AM";
+                      handleHourChange(hour.toString().padStart(2, "0"));
+                      handleMinuteChange(minute.toString().padStart(2, "0"));
+                      handleAmPmChange(amPm);
+                    }}
+                  >
+                    Now
+                  </button>
+                  <button
+                    type="button"
+                    className="py-1 px-2.5 text-[13px] font-medium rounded-md bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:ring-2 focus:ring-blue-500"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    OK
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-      </PopoverContent>
-    </Popover>
+      </div>
+    </div>
   );
-}
+};

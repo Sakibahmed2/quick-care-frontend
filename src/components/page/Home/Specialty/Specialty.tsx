@@ -32,7 +32,7 @@ const specialties = [
 
 const Specialty = () => {
   return (
-    <div className="mt-20">
+    <div className="mt-20 ">
       <div className="w-full max-w-[500px] text-center mx-auto">
         <h2 className="text-4xl font-medium">Find by specialty</h2>
         <p className="text-slate-600 mt-4">
@@ -41,7 +41,7 @@ const Specialty = () => {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-5 bg-primary/10 mt-10 mb-10 w-10/12 mx-auto px-10 py-5 rounded-3xl">
+      <div className="grid md:grid-cols-5 bg-primary/10 mt-10 mb-10 w-10/12 mx-auto px-10 py-5 rounded-3xl backdrop-blur-md">
         {specialties.map((specialty: TSpecialty, index: number) => (
           <SpecialtyCard key={index} specialty={specialty} />
         ))}

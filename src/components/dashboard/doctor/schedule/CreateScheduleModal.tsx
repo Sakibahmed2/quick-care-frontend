@@ -2,13 +2,19 @@
 
 import { ReusableDialog } from "@/components/shared/ReusableDialog";
 import { Button } from "@/components/UI/button";
+import { TimePicker } from "@/components/UI/TimePicker";
 import { TModalComponentsProps } from "@/types/global";
+import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 
 const CreateScheduleModal = ({
   isDialogOpen,
   setIsDialogOpen,
 }: TModalComponentsProps) => {
+  const [selectedTime, setSelectedTime] = useState<string>("");
+
+  console.log(selectedTime);
+
   const {
     register,
     handleSubmit,
@@ -32,7 +38,9 @@ const CreateScheduleModal = ({
       className="w-[600px]"
     >
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>Hello</div>
+        <div>
+          <TimePicker value={selectedTime} onChange={setSelectedTime} />
+        </div>
 
         <div className="flex justify-end mt-6 gap-4">
           <Button type="submit">Submit</Button>

@@ -72,9 +72,9 @@ const specialties = [
 
 const DoctorsPage = () => {
   return (
-    <Container className="mt-10">
+    <Container className="pt-10 pb-10 backdrop-blur-md">
       <div className="grid grid-cols-5 gap-8">
-        <div className="col-span-1">
+        <div className="col-span-1 ">
           {specialties.map((specialty, idx) => (
             <p
               key={idx}

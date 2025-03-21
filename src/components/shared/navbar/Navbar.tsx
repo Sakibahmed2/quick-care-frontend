@@ -25,7 +25,7 @@ const items = [
 const Navbar = () => {
   return (
     <Container>
-      <div className="py-2 px-2 border-b ">
+      <div className="py-2 px-2 border-b backdrop-blur-sm">
         <div className="flex items-center justify-between ">
           {/* img section */}
           <div className="flex items-center gap-2">
