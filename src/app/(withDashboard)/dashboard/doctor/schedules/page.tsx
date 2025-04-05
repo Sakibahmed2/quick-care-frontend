@@ -89,7 +89,7 @@ const DoctorSchedulesPage = () => {
 
         <Table>
           <TableHeader className="rounded-md">
-            <TableRow className="overflow-hidden rounded-md">
+            <TableRow className="overflow-hidden rounded-md bg-gray-100">
               <TableHead>Date</TableHead>
               <TableHead>Start Time</TableHead>
               <TableHead>End Time</TableHead>
