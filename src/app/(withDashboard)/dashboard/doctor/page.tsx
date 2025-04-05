@@ -68,7 +68,7 @@ const DoctorDashboard = () => {
 
         <Table>
           <TableHeader className="rounded-md">
-            <TableRow className="overflow-hidden rounded-md">
+            <TableRow className="overflow-hidden  bg-gray-100">
               <TableHead>Patient</TableHead>
               <TableHead>Date</TableHead>
               <TableHead>Time</TableHead>
