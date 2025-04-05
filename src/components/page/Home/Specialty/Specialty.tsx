@@ -4,8 +4,9 @@ import cardiologyImg from "@/assets/specialties/cardiology.png";
 import dentalImg from "@/assets/specialties/tooth.png";
 import organImg from "@/assets/specialties/organ.png";
 import disabledImg from "@/assets/specialties/disabled.png";
-import SpecialtyCard from "@/components/UI/SpecialtyCard";
+
 import { TSpecialty } from "@/types/global";
+import SpecialtyCard from "@/components/UI/SpecialtyCard";
 
 const specialties = [
   {
