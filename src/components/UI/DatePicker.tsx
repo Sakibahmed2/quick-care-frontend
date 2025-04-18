@@ -1,58 +1,38 @@
-"use client"; // Required for client-side interactivity
+"use client";
 
-import * as React from "react";
-import { format } from "date-fns";
-import { cn } from "@/lib/cn";
-import { Button } from "@/components/UI/button";
-import { Calendar } from "@/components/UI/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/UI/popover";
-import { CalendarIcon } from "lucide-react";
+import React from "react";
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { CalendarDays } from "lucide-react";
 
-interface DatePickerProps {
-  value: Date | undefined;
-  onChange: (date: Date | undefined) => void;
+interface ControlledDatePickerProps {
+  value: Date | null;
+  onChange: (date: Date | null) => void;
   placeholder?: string;
-  className?: string;
+  disabled?: boolean;
 }
 
-export function DatePicker({
+const DatePicker: React.FC<ControlledDatePickerProps> = ({
   value,
   onChange,
-  placeholder = "Pick a date",
-  className,
-}: DatePickerProps) {
-  const [isOpen, setIsOpen] = React.useState(false);
-
+  placeholder = "Select a date",
+  disabled = false,
+}) => {
   return (
-    <Popover open={isOpen} onOpenChange={setIsOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          className={cn(
-            "w-full justify-start text-left font-normal",
-            !value && "text-muted-foreground",
-            className
-          )}
-        >
-          <CalendarIcon className="mr-2 h-4 w-4" />
-          {value ? format(value, "MM/dd/yyyy") : <span>{placeholder}</span>}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0">
-        <Calendar
-          mode="single"
-          selected={value}
-          onSelect={(date) => {
-            onChange(date);
-            setIsOpen(false);
-          }}
-          initialFocus
-        />
-      </PopoverContent>
-    </Popover>
+    <div className="relative w-full max-w-sm">
+      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+        <CalendarDays size={20} />
+      </div>
+      <ReactDatePicker
+        selected={value}
+        onChange={onChange}
+        dateFormat="dd/MM/yyyy"
+        placeholderText={placeholder}
+        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+        disabled={disabled}
+      />
+    </div>
   );
-}
+};
+
+export default DatePicker;

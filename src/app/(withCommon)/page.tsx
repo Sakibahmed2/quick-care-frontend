@@ -2,7 +2,7 @@ import HeroSection from "@/components/page/Home/HeroSection/HeroSection";
 import HowItWorks from "@/components/page/Home/HowItWorks/HowItWorks";
 import Specialty from "@/components/page/Home/Specialty/Specialty";
 import TopDoctor from "@/components/page/Home/TopDoctor/TopDoctor";
-import Container from "@/components/UI/Container";
+import Container from "@/components/ui/Container";
 import Image from "next/image";
 import React from "react";
 

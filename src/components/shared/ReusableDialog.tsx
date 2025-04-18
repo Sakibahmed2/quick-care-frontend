@@ -6,7 +6,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/UI/dialog";
+} from "@/components/ui/dialog";
 import { ReactNode } from "react";
 
 interface ReusableDialogProps {

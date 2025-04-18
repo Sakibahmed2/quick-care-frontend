@@ -1,7 +1,7 @@
 import React from "react";
 import doctor1 from "@/assets/doctors/doctor1.png";
 import doctor2 from "@/assets/doctors/doctor2.png";
-import Container from "@/components/UI/Container";
+import Container from "@/components/ui/Container";
 import Image from "next/image";
 import { CircleAlert } from "lucide-react";
 

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { Input } from "@/components/UI/input";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -10,7 +10,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/UI/select";
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -18,7 +18,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/UI/table";
+} from "@/components/ui/table";
 import { Search } from "lucide-react";
 import { useState } from "react";
 
@@ -106,7 +106,7 @@ const AdminPatientsPage = () => {
 
         <Table>
           <TableHeader className="rounded-md">
-            <TableRow className="overflow-hidden rounded-md">
+            <TableRow className="overflow-hidden rounded-md bg-gray-100">
               <TableHead>Name</TableHead>
               <TableHead>Email</TableHead>
               <TableHead>Age</TableHead>
