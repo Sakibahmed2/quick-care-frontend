@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader } from "./card";
 import { Separator } from "./separator";
 
 const DoctorCard = ({ doctor }: { doctor: any }) => {
-  const { id, name, img, specialty, experience, isAvailable } = doctor || {};
+  const { id, name, img, specialty, isAvailable } = doctor || {};
 
   return (
     <Link href={`/doctors/${id}`} passHref>

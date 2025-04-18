@@ -2,9 +2,9 @@
 
 import doctor1 from "@/assets/doctors/doctor1.png";
 import doctor2 from "@/assets/doctors/doctor2.png";
-import { Badge } from "@/components/UI/badge";
-import { Button } from "@/components/UI/button";
-import { Input } from "@/components/UI/input";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -13,7 +13,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/UI/select";
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -21,7 +21,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/UI/table";
+} from "@/components/ui/table";
 import { Search, SquarePlus } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
@@ -121,7 +121,7 @@ const AdminDoctorPage = () => {
 
         <Table>
           <TableHeader className="rounded-md">
-            <TableRow className="overflow-hidden rounded-md">
+            <TableRow className="overflow-hidden rounded-md bg-gray-100">
               <TableHead>Name</TableHead>
               <TableHead>Specialty</TableHead>
               <TableHead>Availability</TableHead>

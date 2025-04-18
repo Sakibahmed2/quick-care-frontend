@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { Badge } from "@/components/UI/badge";
-import { Button } from "@/components/UI/button";
-import { Input } from "@/components/UI/input";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -12,7 +12,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/UI/select";
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -20,7 +20,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/UI/table";
+} from "@/components/ui/table";
 import { Search, SquarePlus } from "lucide-react";
 import { useState } from "react";
 
@@ -114,7 +114,7 @@ const AdminTransactionPage = () => {
 
         <Table>
           <TableHeader className="rounded-md">
-            <TableRow className="overflow-hidden rounded-md">
+            <TableRow className="overflow-hidden rounded-md bg-gray-100">
               <TableHead>Patient name</TableHead>
               <TableHead>Doctor name</TableHead>
               <TableHead>Amount</TableHead>

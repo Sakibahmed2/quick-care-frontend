@@ -1,5 +1,5 @@
-import { Badge } from "@/components/UI/badge";
-import StatisticsCard from "@/components/UI/StatisticsCard";
+import { Badge } from "@/components/ui/badge";
+import StatisticsCard from "@/components/ui/StatisticsCard";
 import {
   Table,
   TableBody,
@@ -7,7 +7,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/UI/table";
+} from "@/components/ui/table";
 import { Calendar, Hospital, Receipt } from "lucide-react";
 
 const statistics = [

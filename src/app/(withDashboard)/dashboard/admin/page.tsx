@@ -1,7 +1,7 @@
 "use client";
 
-import { Badge } from "@/components/UI/badge";
-import StatisticsCard from "@/components/UI/StatisticsCard";
+import { Badge } from "@/components/ui/badge";
+import StatisticsCard from "@/components/ui/StatisticsCard";
 import {
   Table,
   TableBody,
@@ -9,7 +9,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/UI/table";
+} from "@/components/ui/table";
 import {
   BriefcaseMedical,
   CalendarDays,
@@ -95,7 +95,7 @@ const AdminDashboard = () => {
       <div className="mt-8">
         <Table>
           <TableHeader className="rounded-md">
-            <TableRow className="overflow-hidden rounded-md">
+            <TableRow className="overflow-hidden rounded-md bg-gray-100">
               <TableHead>Patient</TableHead>
               <TableHead>Doctor</TableHead>
               <TableHead>Date</TableHead>

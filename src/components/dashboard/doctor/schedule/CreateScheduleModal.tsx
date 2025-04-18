@@ -1,19 +1,28 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { ReusableDialog } from "@/components/shared/ReusableDialog";
-import { Button } from "@/components/UI/button";
-import { TimePicker } from "@/components/UI/TimePicker";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 import { TModalComponentsProps } from "@/types/global";
+import { CalendarIcon } from "lucide-react";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
+import { format } from "date-fns";
 
 const CreateScheduleModal = ({
   isDialogOpen,
   setIsDialogOpen,
 }: TModalComponentsProps) => {
-  const [selectedTime, setSelectedTime] = useState<string>("");
+  const [date, setDate] = useState<Date | undefined>(new Date());
 
-  console.log(selectedTime);
+  console.log(date);
 
   const {
     register,
@@ -39,7 +48,28 @@ const CreateScheduleModal = ({
     >
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <TimePicker value={selectedTime} onChange={setSelectedTime} />
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={"outline"}
+                className={cn(
+                  "w-[280px] justify-start text-left font-normal",
+                  !date && "text-muted-foreground"
+                )}
+              >
+                <CalendarIcon />
+                {date ? format(date, "PPP") : <span>Pick a date</span>}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0">
+              <Calendar
+                mode="single"
+                selected={date}
+                onSelect={setDate}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
         </div>
 
         <div className="flex justify-end mt-6 gap-4">

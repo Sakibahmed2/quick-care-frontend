@@ -6,7 +6,7 @@ import organImg from "@/assets/specialties/organ.png";
 import disabledImg from "@/assets/specialties/disabled.png";
 
 import { TSpecialty } from "@/types/global";
-import SpecialtyCard from "@/components/UI/SpecialtyCard";
+import SpecialtyCard from "@/components/ui/SpecialtyCard";
 
 const specialties = [
   {

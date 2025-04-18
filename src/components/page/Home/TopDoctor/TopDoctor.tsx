@@ -1,7 +1,7 @@
 import React from "react";
 import doctor1 from "@/assets/doctors/doctor1.png";
 import doctor2 from "@/assets/doctors/doctor2.png";
-import DoctorCard from "@/components/UI/DoctorCard";
+import DoctorCard from "@/components/ui/DoctorCard";
 
 const doctors = [
   {

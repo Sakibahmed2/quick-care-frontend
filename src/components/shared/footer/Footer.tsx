@@ -1,4 +1,4 @@
-import Container from "@/components/UI/Container";
+import Container from "@/components/ui/Container";
 import Image from "next/image";
 import React from "react";
 import logo from "@/assets/logo.png";

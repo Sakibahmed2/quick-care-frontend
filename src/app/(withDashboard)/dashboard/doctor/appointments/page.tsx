@@ -1,8 +1,8 @@
 "use client";
 
-import { Badge } from "@/components/UI/badge";
+import { Badge } from "@/components/ui/badge";
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Button } from "@/components/UI/button";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -11,7 +11,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/UI/select";
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -19,7 +19,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/UI/table";
+} from "@/components/ui/table";
 
 export const appointmentData = [
   {
