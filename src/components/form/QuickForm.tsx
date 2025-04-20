@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 import {
   FieldValues,
@@ -15,6 +16,7 @@ type TFormConfig = {
 type TFormProps = {
   children: ReactNode;
   onSubmit: SubmitHandler<any>;
+  className?: string;
 } & TFormConfig;
 
 const QuickForm = ({
@@ -22,6 +24,7 @@ const QuickForm = ({
   onSubmit,
   resolver,
   defaultValues,
+  className,
 }: TFormProps) => {
   const formConfig: TFormConfig = {};
 
@@ -44,7 +47,9 @@ const QuickForm = ({
 
   return (
     <FormProvider {...method}>
-      <form onSubmit={handleSubmit(submit)}>{children}</form>
+      <form onSubmit={handleSubmit(submit)} className={cn(className)}>
+        {children}
+      </form>
     </FormProvider>
   );
 };

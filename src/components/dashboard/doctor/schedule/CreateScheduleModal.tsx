@@ -57,15 +57,25 @@ const CreateScheduleModal = ({
           endTime: endTime,
         }}
       >
-        <div>
-          <DatePicker date={date} setDate={setDate} />
-          <TimePicker value={startTime} onChange={setStartTime} />
-          <TimePicker value={endTime} onChange={setEndTime} />
+        <div className="space-y-3">
+          <DatePicker date={date} setDate={setDate} label="Pick a date" />
+          <div className="flex gap-4 ">
+            <TimePicker
+              value={startTime}
+              onChange={setStartTime}
+              label="Start time"
+            />
+            <TimePicker
+              value={endTime}
+              onChange={setEndTime}
+              label="End time"
+            />
+          </div>
         </div>
 
         <div className="flex justify-end mt-6 gap-4">
           <Button type="submit">Submit</Button>
-          <Button variant={"outline"} onClick={handleCancel}>
+          <Button type="button" variant={"outline"} onClick={handleCancel}>
             Cancel
           </Button>
         </div>

@@ -1,8 +1,7 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { Input } from "../ui/input";
-import { cn } from "@/lib/utils";
-import { Label } from "@radix-ui/react-select";
 
 type TInputFormProps = {
   name: string;
@@ -31,8 +30,8 @@ const QuickInput = ({
       name={name}
       render={({ field, fieldState: { error } }) => (
         <>
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label>{label}</Label>
+          <div className="w-full">
+            <label className="mb-1 block text-sm text-gray-500 ">{label}</label>
             <Input
               {...field}
               placeholder={placeholder}
@@ -41,8 +40,10 @@ const QuickInput = ({
               StartIcon={startIcon}
               required={required}
             />
+            {error && (
+              <span className="text-red-500 text-xs">{error.message}</span>
+            )}
           </div>
-          {error && <span className="text-red-500">{error.message}</span>}
         </>
       )}
     />
