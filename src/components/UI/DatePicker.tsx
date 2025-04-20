@@ -1,36 +1,43 @@
-"use client";
-
 import React from "react";
-import ReactDatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { CalendarDays } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover";
+import { Button } from "./button";
+import { cn } from "@/lib/utils";
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from "./calendar";
+import { format } from "date-fns";
 
-interface ControlledDatePickerProps {
-  value: Date | null;
-  onChange: (date: Date | null) => void;
-  placeholder?: string;
-  disabled?: boolean;
-}
+type TDatePickerProps = {
+  date: Date | undefined;
+  setDate: (date: Date | undefined) => void;
+  label?: string;
+};
 
-const DatePicker: React.FC<ControlledDatePickerProps> = ({
-  value,
-  onChange,
-  placeholder = "Select a date",
-  disabled = false,
-}) => {
+const DatePicker = ({ date, setDate, label }: TDatePickerProps) => {
   return (
-    <div className="relative w-full max-w-sm">
-      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-        <CalendarDays size={20} />
-      </div>
-      <ReactDatePicker
-        selected={value}
-        onChange={onChange}
-        dateFormat="dd/MM/yyyy"
-        placeholderText={placeholder}
-        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-        disabled={disabled}
-      />
+    <div>
+      <label className="mb-1 block text-sm text-gray-500 ">{label}</label>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            variant={"outline"}
+            className={cn(
+              "w-full justify-start text-left font-normal",
+              !date && "text-muted-foreground"
+            )}
+          >
+            <CalendarIcon />
+            {date ? format(date, "PPP") : <span>Pick a date</span>}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0">
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={setDate}
+            initialFocus
+          />
+        </PopoverContent>
+      </Popover>
     </div>
   );
 };

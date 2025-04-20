@@ -15,26 +15,29 @@ import { CalendarIcon } from "lucide-react";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { format } from "date-fns";
+import DatePicker from "@/components/ui/DatePicker";
+import { TimePicker } from "@/components/ui/TimePicker";
+import QuickForm from "@/components/form/QuickForm";
 
 const CreateScheduleModal = ({
   isDialogOpen,
   setIsDialogOpen,
 }: TModalComponentsProps) => {
   const [date, setDate] = useState<Date | undefined>(new Date());
-
-  console.log(date);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data: FieldValues) => {
-    console.log(data);
-  };
+  const [startTime, setStartTime] = useState<string | undefined>(undefined);
+  const [endTime, setEndTime] = useState<string | undefined>(undefined);
 
   const handleCancel = () => {
+    setIsDialogOpen(false);
+  };
+
+  const handleSubmit = (data: FieldValues) => {
+    data = {
+      date: date,
+      startTime: startTime,
+      endTime: endTime,
+    };
+    console.log(data);
     setIsDialogOpen(false);
   };
 
@@ -46,39 +49,37 @@ const CreateScheduleModal = ({
       description="Create a new schedule for your patients."
       className="w-[600px]"
     >
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant={"outline"}
-                className={cn(
-                  "w-[280px] justify-start text-left font-normal",
-                  !date && "text-muted-foreground"
-                )}
-              >
-                <CalendarIcon />
-                {date ? format(date, "PPP") : <span>Pick a date</span>}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0">
-              <Calendar
-                mode="single"
-                selected={date}
-                onSelect={setDate}
-                initialFocus
-              />
-            </PopoverContent>
-          </Popover>
+      <QuickForm
+        onSubmit={handleSubmit}
+        defaultValues={{
+          date: date,
+          startTime: startTime,
+          endTime: endTime,
+        }}
+      >
+        <div className="space-y-3">
+          <DatePicker date={date} setDate={setDate} label="Pick a date" />
+          <div className="flex gap-4 ">
+            <TimePicker
+              value={startTime}
+              onChange={setStartTime}
+              label="Start time"
+            />
+            <TimePicker
+              value={endTime}
+              onChange={setEndTime}
+              label="End time"
+            />
+          </div>
         </div>
 
         <div className="flex justify-end mt-6 gap-4">
           <Button type="submit">Submit</Button>
-          <Button variant={"outline"} onClick={handleCancel}>
+          <Button type="button" variant={"outline"} onClick={handleCancel}>
             Cancel
           </Button>
         </div>
-      </form>
+      </QuickForm>
     </ReusableDialog>
   );
 };

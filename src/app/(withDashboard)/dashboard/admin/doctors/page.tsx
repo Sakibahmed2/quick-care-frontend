@@ -25,6 +25,7 @@ import {
 import { Search, SquarePlus } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import CreateDoctorModal from "./_components/CreateDoctorModal";
 
 const doctors = [
   {
@@ -75,6 +76,7 @@ const doctors = [
 
 const AdminDoctorPage = () => {
   const [searchParam, setSearchParam] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   console.log(searchParam);
 
@@ -88,7 +90,7 @@ const AdminDoctorPage = () => {
           </p>
         </div>
 
-        <Button size={"lg"}>
+        <Button size={"lg"} onClick={() => setIsOpen(true)}>
           <SquarePlus size={24} />
           Add doctor{" "}
         </Button>
@@ -175,6 +177,9 @@ const AdminDoctorPage = () => {
           </TableBody>
         </Table>
       </div>
+
+      {/* Create Doctor Modal */}
+      <CreateDoctorModal isDialogOpen={isOpen} setIsDialogOpen={setIsOpen} />
     </div>
   );
 };
