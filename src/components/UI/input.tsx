@@ -8,7 +8,7 @@ interface InputProps extends React.ComponentProps<"input"> {
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, StartIcon, ...props }, ref) => {
     return (
-      <div className="relative w-full">
+      <div className={cn("relative w-full")}>
         {StartIcon && (
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
             <StartIcon />

@@ -1,9 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+"use client";
+
 import Container from "@/components/ui/Container";
-import React from "react";
+import React, { useState } from "react";
 import doctor1 from "@/assets/doctors/doctor1.png";
 import doctor2 from "@/assets/doctors/doctor2.png";
 import DoctorCard from "@/components/ui/DoctorCard";
 import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 
 const doctors = [
   {
@@ -71,15 +76,40 @@ const specialties = [
 ];
 
 const DoctorsPage = () => {
+  const [searchParam, setSearchParam] = useState("");
+
   return (
     <Container className="pt-10 pb-10 backdrop-blur-md">
+      <div className="flex items-center">
+        <div className=" mb-5">
+          <h1 className="text-3xl font-medium">Doctors</h1>
+
+          <p className="text-gray-500 w-10/12 ">
+            Find the best doctors in your area. Search by specialty or name to
+            find the right doctor for you.
+          </p>
+        </div>
+
+        <div className="w-1/3 mb-5 ml-auto">
+          <Input
+            type="text"
+            placeholder="Search doctors"
+            StartIcon={Search}
+            onChange={(e) => setSearchParam(e.target.value)}
+            className="py-6 "
+          />
+        </div>
+      </div>
+
+      <hr className="border mb-4" />
+
       <div className="grid grid-cols-5 gap-8">
         <div className="col-span-1 ">
           {specialties.map((specialty, idx) => (
             <p
               key={idx}
               className={cn(
-                "border border-slate-400 text-slate-700 mt-3 p-2 text-center rounded-md",
+                "border border-slate-400 text-slate-700 mb-3 p-2 text-center rounded-md",
                 specialty.name === "Cardiologist"
                   ? "bg-blue-100 border-none"
                   : ""

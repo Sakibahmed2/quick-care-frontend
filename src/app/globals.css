@@ -105,3 +105,9 @@ input:focus {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .secondary-text {
+    @apply text-gray-500 dark:text-gray-400 text-xs md:text-lg;
+  }
+}

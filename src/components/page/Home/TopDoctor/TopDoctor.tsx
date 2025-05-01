@@ -54,8 +54,10 @@ const TopDoctor = () => {
   return (
     <div className="mt-20 mb-20">
       <div>
-        <h2 className="text-4xl font-medium text-center">Top Doctors</h2>
-        <p className="text-center text-slate-600 mt-2">
+        <h2 className="text-2xl md:text-4xl font-medium text-center">
+          Top Doctors
+        </h2>
+        <p className="text-center secondary-text mt-2">
           Choose from our top-rated doctors and schedule an appointment today.
         </p>
       </div>
