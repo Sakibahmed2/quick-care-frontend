@@ -29,13 +29,14 @@ const HeroSection = () => {
   });
 
   return (
-    <div className="md:flex justify-between items-center mt-10 rounded-lg md:h-[500px] px-4 pt-4 md:px-0 md:pt-0 w-full backdrop-blur-sm ">
+    <div className="md:flex justify-between items-center mt-10 rounded-lg md:h-[500px] px-4 pt-20 md:px-0 md:pt-0 w-full backdrop-blur-sm ">
       <div
         id="text-animation"
         className="text-center md:text-start md:w-1/2 md:ml-16"
       >
         <h1 className=" text-3xl md:text-6xl font-semibold ">
-          Find the best doctors in your area
+          Find the <span className="text-primary">Best Doctors</span> in your
+          area
         </h1>
         <p className="secondary-text mt-2 mb-4">
           Book an appointment with the best doctors in your area
@@ -47,7 +48,7 @@ const HeroSection = () => {
           </span>
         </Button>
       </div>
-      <div className="md:w-1/2 md:mt-40 md:-mr-20" id="hero-img">
+      <div className="md:w-1/2 mt-5 md:mt-40 md:-mr-20" id="hero-img">
         <Image
           src={bgImg}
           height={1000}

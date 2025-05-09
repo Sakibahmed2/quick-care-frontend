@@ -2,9 +2,11 @@
 
 import { cn } from "@/lib/utils";
 import { Eye, EyeOff } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import logo from "@/assets/logo.png";
 
 type TLoginData = {
   email: string;
@@ -32,7 +34,19 @@ const LoginPage = () => {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="border-primary/30 border-2 p-8 shadow-md w-full max-w-[400px] rounded-lg">
-        <h1 className="text-2xl font-semibold text-center mb-4">Login</h1>
+        <div className="mb-2">
+          <Image
+            src={logo}
+            height={50}
+            width={50}
+            alt="logo"
+            className="mx-auto mb-2"
+          />
+          <h1 className="text-2xl font-semibold text-center mb-2">Welcome </h1>
+          <p className=" text-sm text-gray-500 text-center">
+            Please enter your email and password to login to your account.
+          </p>
+        </div>
 
         <form
           onSubmit={handleSubmit(onSubmit)}

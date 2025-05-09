@@ -79,7 +79,7 @@ const DoctorsPage = () => {
   const [searchParam, setSearchParam] = useState("");
 
   return (
-    <Container className="pt-10 pb-10 backdrop-blur-md">
+    <Container className="pt-20 pb-10 backdrop-blur-md">
       <div className="flex items-center">
         <div className=" mb-5">
           <h1 className="text-3xl font-medium">Doctors</h1>
