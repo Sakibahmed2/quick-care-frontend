@@ -4,6 +4,7 @@ import doctor2 from "@/assets/doctors/doctor2.png";
 import Container from "@/components/ui/Container";
 import Image from "next/image";
 import { CircleAlert } from "lucide-react";
+import AppointmentCarousel from "@/components/page/Doctor/AppointmentCarousel";
 
 const doctors = [
   {
@@ -59,8 +60,6 @@ const SingleDoctorPage = async ({
 }) => {
   const doctorId = (await params).doctorId;
 
-  console.log((await params).doctorId);
-
   const doctor = doctors.find((doctor) => doctor.id === doctorId);
 
   if (!doctor) {
@@ -70,7 +69,7 @@ const SingleDoctorPage = async ({
   const { name, img, specialty, experience, about, fees, isAvailable } = doctor;
 
   return (
-    <Container className="mt-10">
+    <Container className="mt-10 pt-10">
       <div className="grid grid-cols-5">
         <div className="col-span-1">
           <Image
@@ -117,33 +116,7 @@ const SingleDoctorPage = async ({
       <div className="mt-10">
         <h2 className="text-2xl font-medium">Booking a slot</h2>
 
-        {/* Date for appointment */}
-        <div className="flex gap-4 mt-4">
-          <div className="px-5 py-3 w-full max-w-[150px] text-center rounded-full bg-primary text-white">
-            Aug - 10
-          </div>
-          <div className="border border-slate-700 px-5 py-3 w-full max-w-[150px] text-center rounded-full ">
-            Aug - 10
-          </div>
-          <div className="border border-slate-700 px-5 py-3 w-full max-w-[150px] text-center rounded-full ">
-            Aug - 10
-          </div>
-          <div className="border border-slate-700 px-5 py-3 w-full max-w-[150px] text-center rounded-full ">
-            Aug - 10
-          </div>
-        </div>
-
-        {/* Time for appointment */}
-        <div>
-          <div className="flex gap-4 mt-4">
-            <div className="px-3 py-1 w-full max-w-[100px] text-center rounded-full border-primary border bg-primary/5 text-sm">
-              10:00 AM
-            </div>
-            <div className="border border-slate-700 px-3 py-1 w-full max-w-[100px] text-center rounded-full text-sm">
-              10:00 AM
-            </div>
-          </div>
-        </div>
+        <AppointmentCarousel />
 
         <button className="btn btn-primary mt-4 rounded-lg">
           Book an appointment

@@ -20,6 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Check, X } from "lucide-react";
 
 export const appointmentData = [
   {
@@ -128,12 +129,15 @@ const DoctorAppointmentsPage = () => {
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center space-x-4">
-                    <Button variant={"default"} size={"sm"}>
+                    <button className="flex items-center gap-1 text-primary">
+                      <Check size={18} />
                       Accept
-                    </Button>
-                    <Button variant={"destructive"} size={"sm"}>
-                      Cancel
-                    </Button>
+                    </button>
+                    <span className="text-gray-300">|</span>
+                    <button className="flex items-center gap-1 text-red-500">
+                      <X size={18} />
+                      Reject
+                    </button>
                   </div>
                 </TableCell>
               </TableRow>
