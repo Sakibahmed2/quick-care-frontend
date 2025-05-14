@@ -70,8 +70,8 @@ const SingleDoctorPage = async ({
 
   return (
     <Container className="mt-10 pt-10">
-      <div className="grid grid-cols-5">
-        <div className="col-span-1">
+      <div className="md:grid grid-cols-5">
+        <div className="col-span-1 flex justify-center items-center mb-2 md:mb-0">
           <Image
             src={img}
             alt="doctor image"
@@ -80,7 +80,7 @@ const SingleDoctorPage = async ({
         </div>
 
         <div className="col-span-4 border-2 rounded-lg p-5">
-          <h2 className="text-3xl font-semibold">{name}</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold">{name}</h2>
           <div className="flex items-center gap-2">
             <p className="text-gray-600 text-lg">{specialty}</p>
             <p className="text-gray-500 text-sm my-2 border border-black rounded-full w-full max-w-28 py-1 text-center">
@@ -114,13 +114,9 @@ const SingleDoctorPage = async ({
       </div>
 
       <div className="mt-10">
-        <h2 className="text-2xl font-medium">Booking a slot</h2>
+        <h2 className="text-xl md:text-2xl font-medium">Booking a slot</h2>
 
         <AppointmentCarousel />
-
-        <button className="btn btn-primary mt-4 rounded-lg">
-          Book an appointment
-        </button>
       </div>
     </Container>
   );

@@ -6,6 +6,7 @@ import { MoveRight } from "lucide-react";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import Link from "next/link";
 
 const HeroSection = () => {
   useGSAP(() => {
@@ -17,19 +18,15 @@ const HeroSection = () => {
       repeat: -1,
       yoyo: true,
       ease: "power1.inOut",
-    });
-
-    gsap.from("#text-animation", {
-      x: -400,
-      stagger: 1.2,
-      duration: 1,
-      opacity: 0,
-      ease: "power1.inOut",
+      delay: 0.5,
     });
   });
 
   return (
-    <div className="md:flex justify-between items-center mt-10 rounded-lg md:h-[500px] px-4 pt-20 md:px-0 md:pt-0 w-full backdrop-blur-sm ">
+    <div
+      className="md:flex justify-between items-center mt-20 rounded-lg md:h-[500px] px-4 pt-20 md:px-0 md:pt-0 w-full backdrop-blur-sm "
+      id="hero-section"
+    >
       <div
         id="text-animation"
         className="text-center md:text-start md:w-1/2 md:ml-16"
@@ -39,14 +36,17 @@ const HeroSection = () => {
           area
         </h1>
         <p className="secondary-text mt-2 mb-4">
-          Book an appointment with the best doctors in your area
+          Find best doctors near you by specialty, location, and availability.
+          Book appointments and read patient reviews easily.
         </p>
-        <Button className="rounded-full">
-          Book appointment
-          <span>
-            <MoveRight />
-          </span>
-        </Button>
+        <Link href="/doctors">
+          <Button variant={"default"} size={"lg"} className="rounded-full">
+            Book appointment
+            <span>
+              <MoveRight />
+            </span>
+          </Button>
+        </Link>
       </div>
       <div className="md:w-1/2 mt-5 md:mt-40 md:-mr-20" id="hero-img">
         <Image

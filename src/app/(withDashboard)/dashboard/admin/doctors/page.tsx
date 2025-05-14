@@ -82,7 +82,7 @@ const AdminDoctorPage = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center">
+      <div className="md:flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-medium">All doctors </h1>
           <p className="text-gray-500 w-10/12 ">

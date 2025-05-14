@@ -44,8 +44,10 @@ const Navbar = () => {
                   <Link
                     href={item.path}
                     className={cn(
-                      "text-gray-800 hover:text-primary transition-colors duration-300",
-                      pathname === item.path ? "text-primary" : ""
+                      "text-gray-800 hover:text-primary transition-colors duration-300 ",
+                      pathname === item.path
+                        ? "text-primary border-b-2 border-primary"
+                        : ""
                     )}
                   >
                     {item.title}

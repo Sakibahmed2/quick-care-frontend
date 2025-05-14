@@ -83,7 +83,9 @@ const AppointmentCarousel = () => {
                 key={index}
                 className={cn(
                   "flex-shrink-0 cursor-pointer snap-start transition-all border rounded-md hover:border-gray-400",
-                  selectedSlot === index ? "border-gray-800 shadow-sm" : ""
+                  selectedSlot === index
+                    ? "bg-primary/5 border-primary shadow-sm"
+                    : ""
                 )}
                 onClick={() => setSelectedSlot(index)}
               >
@@ -101,9 +103,11 @@ const AppointmentCarousel = () => {
             ))}
           </div>
         </div>
-
-        <div className="w-full h-px bg-gray-200 mt-6"></div>
       </div>
+
+      <Button variant={"outline"} size={"lg"}>
+        Book an appointment
+      </Button>
     </div>
   );
 };

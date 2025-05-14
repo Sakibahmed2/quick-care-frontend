@@ -17,6 +17,8 @@ const formValidationSchema = z.object({
   password: z
     .string()
     .min(6, { message: "Password must be at least 6 character" }),
+  specialty: z.string().min(1, { message: "Specialty is required" }),
+  location: z.string().min(1, { message: "Location is required" }),
 });
 
 const CreateDoctorModal = ({
@@ -41,6 +43,8 @@ const CreateDoctorModal = ({
           name: "",
           email: "",
           password: "",
+          specialty: "",
+          location: "",
         }}
         resolver={zodResolver(formValidationSchema)}
         className="space-y-3"
@@ -53,6 +57,19 @@ const CreateDoctorModal = ({
             name="password"
             placeholder="Password"
             label="Doctor password "
+          />
+        </div>
+
+        <div className="flex gap-3">
+          <QuickInput
+            name="specialty"
+            placeholder="Specialty"
+            label="Doctor specialty"
+          />
+          <QuickInput
+            name="location"
+            placeholder="Location"
+            label="Doctor location"
           />
         </div>
 
