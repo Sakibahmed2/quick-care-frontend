@@ -31,7 +31,7 @@ export const ReusableDialog = ({
   className,
 }: ReusableDialogProps) => {
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={onClose} >
       <DialogContent className={className}>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>

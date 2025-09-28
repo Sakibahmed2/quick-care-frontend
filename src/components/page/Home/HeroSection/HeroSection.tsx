@@ -32,7 +32,7 @@ const HeroSection = () => {
         className="text-center md:text-start md:w-1/2 md:ml-16"
       >
         <h1 className=" text-3xl md:text-6xl font-semibold ">
-          Find the <span className="text-primary">Best Doctors</span> in your
+          Find the <span className="text-primary ">Best Doctors</span> in your
           area
         </h1>
         <p className="secondary-text mt-2 mb-4">
@@ -59,6 +59,8 @@ const HeroSection = () => {
           blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEwMDAiIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiPjxpbWFnZSB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEwMDAiIHhsaW5rOnNwYWNlPSJ1cmwoI2ltYWdlMSkiIHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEwMDAiIGZpbGw9IiNmZmZmZmYiIC8+PC9zdmc+"
         />
       </div>
+
+
     </div>
   );
 };

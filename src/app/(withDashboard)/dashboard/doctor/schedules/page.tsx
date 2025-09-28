@@ -4,7 +4,7 @@ import CreateScheduleModal from "@/components/dashboard/doctor/schedule/CreateSc
 import { Badge } from "@/components/ui/badge";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import DatePicker from "@/components/ui/DatePicker";
 import {
   Select,
   SelectContent,
@@ -22,7 +22,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Search, SquarePlus } from "lucide-react";
+import { SquarePlus } from "lucide-react";
 import { useState } from "react";
 
 const doctorSchedules = [
@@ -53,6 +53,7 @@ const DoctorSchedulesPage = () => {
   const [searchParam, setSearchParam] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -68,6 +69,7 @@ const DoctorSchedulesPage = () => {
           <SquarePlus size={24} />
           Add schedules{" "}
         </Button>
+
       </div>
 
       <div className="border mt-8 rounded-lg">

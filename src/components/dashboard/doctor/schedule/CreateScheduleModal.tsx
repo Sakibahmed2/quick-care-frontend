@@ -1,29 +1,18 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { ReusableDialog } from "@/components/shared/ReusableDialog";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { TModalComponentsProps } from "@/types/global";
-import { CalendarIcon } from "lucide-react";
-import { useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
-import { format } from "date-fns";
 import DatePicker from "@/components/ui/DatePicker";
 import { TimePicker } from "@/components/ui/TimePicker";
-import QuickForm from "@/components/form/QuickForm";
+import { TModalComponentsProps } from "@/types/global";
+import { useState } from "react";
+import { FieldValues } from "react-hook-form";
 
 const CreateScheduleModal = ({
   isDialogOpen,
   setIsDialogOpen,
 }: TModalComponentsProps) => {
-  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [date, setDate] = useState<Date | undefined>(undefined);
   const [startTime, setStartTime] = useState<string | undefined>(undefined);
   const [endTime, setEndTime] = useState<string | undefined>(undefined);
 
@@ -31,13 +20,14 @@ const CreateScheduleModal = ({
     setIsDialogOpen(false);
   };
 
-  const handleSubmit = (data: FieldValues) => {
-    data = {
+  const handleSubmit = () => {
+    const scheduleData: FieldValues = {
       date: date,
       startTime: startTime,
       endTime: endTime,
     };
-    console.log(data);
+    console.log("Schedule Data:", scheduleData);
+
     setIsDialogOpen(false);
   };
 
@@ -49,37 +39,26 @@ const CreateScheduleModal = ({
       description="Create a new schedule for your patients."
       className="w-[600px]"
     >
-      <QuickForm
-        onSubmit={handleSubmit}
-        defaultValues={{
-          date: date,
-          startTime: startTime,
-          endTime: endTime,
-        }}
-      >
-        <div className="space-y-3">
-          <DatePicker date={date} setDate={setDate} label="Pick a date" />
-          <div className="flex gap-4 ">
-            <TimePicker
-              value={startTime}
-              onChange={setStartTime}
-              label="Start time"
-            />
-            <TimePicker
-              value={endTime}
-              onChange={setEndTime}
-              label="End time"
-            />
-          </div>
-        </div>
+      <div className="space-y-3">
+        <DatePicker date={date} setDate={setDate} label="Pick a date"
 
-        <div className="flex justify-end mt-6 gap-4">
-          <Button type="submit">Submit</Button>
-          <Button type="button" variant={"outline"} onClick={handleCancel}>
-            Cancel
-          </Button>
+        />
+        <div className="flex gap-4 ">
+          <TimePicker
+            value={startTime}
+            onChange={setStartTime}
+            label="Start time"
+          />
+          <TimePicker value={endTime} onChange={setEndTime} label="End time" />
         </div>
-      </QuickForm>
+      </div>
+
+      <div className="flex justify-end mt-6 gap-4">
+        <Button onClick={() => handleSubmit()}>Submit</Button>
+        <Button variant={"outline"} onClick={handleCancel}>
+          Cancel
+        </Button>
+      </div>
     </ReusableDialog>
   );
 };
