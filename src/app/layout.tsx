@@ -2,7 +2,8 @@
 import type { Metadata } from "next";
 import { Poppins, Outfit } from "next/font/google";
 import "./globals.css";
-import ThemeProvider from "@/lib/ThemeProvider";
+import { Toaster } from 'sonner';
+
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -26,7 +27,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${poppins.className} antialiased`}>{children}</body>
+      <body className={`${poppins.className} antialiased`}>
+        {children}
+        <Toaster position="top-right" richColors />
+      </body>
     </html>
   );
 }

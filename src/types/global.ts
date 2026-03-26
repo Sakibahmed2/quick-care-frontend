@@ -13,4 +13,5 @@ export type TSpecialty = {
 export type TModalComponentsProps = {
   isDialogOpen: boolean;
   setIsDialogOpen: (isOpen: boolean) => void;
+  itemId?: string;
 };

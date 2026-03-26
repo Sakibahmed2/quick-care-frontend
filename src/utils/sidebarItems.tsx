@@ -3,6 +3,7 @@ import {
   Calendar,
   CalendarSearch,
   CreditCard,
+  GraduationCap,
   Hospital,
   House,
 } from "lucide-react";
@@ -32,6 +33,11 @@ export const sidebarItems = (role: string) => {
           title: "Transactions",
           icon: <CreditCard />,
           path: `${role}/transactions`,
+        },
+        {
+          title: "Specialties",
+          icon: <GraduationCap />,
+          path: `${role}/specialties`,
         }
       );
       break;
