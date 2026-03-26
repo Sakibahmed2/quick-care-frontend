@@ -34,6 +34,7 @@ const QuickInput = ({
             <label className="mb-1 block text-sm text-gray-500 ">{label}</label>
             <Input
               {...field}
+              value={field.value ?? ""}
               placeholder={placeholder}
               className={cn("w-full", inputClassName)}
               type={type}

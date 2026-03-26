@@ -30,7 +30,7 @@ const RegisterPage = () => {
   });
 
   const onSubmit = (data: TLoginData) => {
-    console.log(data);
+    void data;
   };
 
   return (

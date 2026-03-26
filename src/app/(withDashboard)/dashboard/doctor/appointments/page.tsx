@@ -1,8 +1,6 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -22,7 +20,7 @@ import {
 } from "@/components/ui/table";
 import { Check, X } from "lucide-react";
 
-export const appointmentData = [
+const appointmentData = [
   {
     id: "1",
     patientName: "John Doe",
@@ -51,7 +49,7 @@ export const appointmentData = [
     reason: "Follow-up for Medication",
   },
   {
-    id: "3",
+    id: "4",
     patientName: " Jhon doe",
     date: "2024-03-22",
     startTime: "02:00 PM",
@@ -104,8 +102,8 @@ const DoctorAppointmentsPage = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {appointmentData.map((item, idx) => (
-              <TableRow key={idx}>
+            {appointmentData.map((item) => (
+              <TableRow key={item.id}>
                 <TableCell>{item.patientName}</TableCell>
                 <TableCell>{item.date}</TableCell>
                 <TableCell>{item.startTime}</TableCell>
@@ -118,10 +116,10 @@ const DoctorAppointmentsPage = () => {
                       item.status === "Scheduled"
                         ? "success"
                         : item.status === "Pending"
-                        ? "warning"
-                        : item.status === "Cancelled"
-                        ? "danger"
-                        : "default"
+                          ? "warning"
+                          : item.status === "Cancelled"
+                            ? "danger"
+                            : "default"
                     }
                   >
                     {item.status}

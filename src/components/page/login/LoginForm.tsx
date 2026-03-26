@@ -42,7 +42,6 @@ const LoginForm = () => {
       }
 
     } catch (err: any) {
-      console.log(err)
       toast.error(err.response?.data?.message || 'Something went wrong', { id: toastId })
     }
   }

@@ -63,8 +63,8 @@ const TopDoctor = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
-        {doctors.map((doctor, index) => (
-          <DoctorCard key={index} doctor={doctor} />
+        {doctors.map((doctor) => (
+          <DoctorCard key={doctor.id.trim()} doctor={doctor} />
         ))}
       </div>
 

@@ -6,7 +6,6 @@ import DatePicker from "@/components/ui/DatePicker";
 import { TimePicker } from "@/components/ui/TimePicker";
 import { TModalComponentsProps } from "@/types/global";
 import { useState } from "react";
-import { FieldValues } from "react-hook-form";
 
 const CreateScheduleModal = ({
   isDialogOpen,
@@ -21,13 +20,6 @@ const CreateScheduleModal = ({
   };
 
   const handleSubmit = () => {
-    const scheduleData: FieldValues = {
-      date: date,
-      startTime: startTime,
-      endTime: endTime,
-    };
-    console.log("Schedule Data:", scheduleData);
-
     setIsDialogOpen(false);
   };
 

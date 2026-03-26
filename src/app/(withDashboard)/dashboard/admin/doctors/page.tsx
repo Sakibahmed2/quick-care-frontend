@@ -24,8 +24,8 @@ import {
 } from "@/components/ui/table";
 import { Search, SquarePlus } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
-import CreateDoctorModal from "./_components/CreateDoctorModal";
 
 const doctors = [
   {
@@ -76,9 +76,15 @@ const doctors = [
 
 const AdminDoctorPage = () => {
   const [searchParam, setSearchParam] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
+  const normalizedSearch = searchParam.trim().toLowerCase();
+  const filteredDoctors = doctors.filter((doctor) => {
+    if (!normalizedSearch) return true;
 
-  console.log(searchParam);
+    return (
+      doctor.name.toLowerCase().includes(normalizedSearch) ||
+      doctor.specialty.toLowerCase().includes(normalizedSearch)
+    );
+  });
 
   return (
     <div>
@@ -89,11 +95,12 @@ const AdminDoctorPage = () => {
             Here you can view, add, edit, and delete doctors from the system.
           </p>
         </div>
-
-        <Button size={"lg"} onClick={() => setIsOpen(true)}>
-          <SquarePlus size={24} />
-          Add doctor{" "}
-        </Button>
+        <Link href={"/dashboard/admin/doctors/create"}>
+          <Button size={"lg"} >
+            <SquarePlus size={24} />
+            Add doctor{" "}
+          </Button>
+        </Link>
       </div>
 
       <div className="border mt-8 rounded-lg">
@@ -102,6 +109,7 @@ const AdminDoctorPage = () => {
             type="text"
             placeholder="Search doctors"
             StartIcon={Search}
+            value={searchParam}
             onChange={(e) => setSearchParam(e.target.value)}
             className="w-1/3 py-6 "
           />
@@ -131,8 +139,8 @@ const AdminDoctorPage = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {doctors.map((item, idx) => (
-              <TableRow key={idx}>
+            {filteredDoctors.map((item) => (
+              <TableRow key={item.id.trim()}>
                 <TableCell>
                   <div className="flex items-center space-x-4">
                     <Image
@@ -178,8 +186,6 @@ const AdminDoctorPage = () => {
         </Table>
       </div>
 
-      {/* Create Doctor Modal */}
-      <CreateDoctorModal isDialogOpen={isOpen} setIsDialogOpen={setIsOpen} />
     </div>
   );
 };

@@ -43,8 +43,8 @@ const Specialty = () => {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4 bg-primary/10 mt-10 mb-10 w-10/12 mx-auto px-10 py-5 rounded-3xl backdrop-blur-md">
-        {specialties.map((specialty: TSpecialty, index: number) => (
-          <SpecialtyCard key={index} specialty={specialty} />
+        {specialties.map((specialty: TSpecialty) => (
+          <SpecialtyCard key={specialty.name} specialty={specialty} />
         ))}
       </div>
     </div>

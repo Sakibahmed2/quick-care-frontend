@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  return <div></div>
+  return <>{children}</>;
 };
 
 export default ThemeProvider;

@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -21,10 +19,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Search, SquarePlus } from "lucide-react";
+import { Search } from "lucide-react";
 import { useState } from "react";
 
-export const transactionData = [
+const transactionData = [
   {
     id: "1",
     patientName: "John Doe",
@@ -74,6 +72,17 @@ export const transactionData = [
 
 const AdminTransactionPage = () => {
   const [searchParam, setSearchParam] = useState("");
+  const normalizedSearch = searchParam.trim().toLowerCase();
+  const filteredTransactions = transactionData.filter((item) => {
+    if (!normalizedSearch) return true;
+
+    return (
+      item.patientName.toLowerCase().includes(normalizedSearch) ||
+      item.doctorName.toLowerCase().includes(normalizedSearch) ||
+      item.method.toLowerCase().includes(normalizedSearch) ||
+      item.status.toLowerCase().includes(normalizedSearch)
+    );
+  });
 
   return (
     <div>
@@ -123,8 +132,8 @@ const AdminTransactionPage = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {transactionData.map((item, idx) => (
-              <TableRow key={idx}>
+            {filteredTransactions.map((item) => (
+              <TableRow key={item.id}>
                 <TableCell>{item.patientName}</TableCell>
                 <TableCell>{item.doctorName}</TableCell>
                 <TableCell>${item.amount}</TableCell>

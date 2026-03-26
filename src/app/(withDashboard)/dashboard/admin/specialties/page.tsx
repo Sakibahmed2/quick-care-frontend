@@ -55,7 +55,15 @@ const SpecialtiesPage = () => {
     const [isEditOpen, setIsEditOpen] = useState(false);
     const [selectedSpecialty, setSelectedSpecialty] = useState('');
 
-    console.log(searchParam);
+    const normalizedSearch = searchParam.trim().toLowerCase();
+    const filteredSpecialties = doctors.filter((item) => {
+        if (!normalizedSearch) return true;
+
+        return (
+            item.name.toLowerCase().includes(normalizedSearch) ||
+            item.createdBy.toLowerCase().includes(normalizedSearch)
+        );
+    });
 
     const handleOpenEditModal = (id: string) => {
         setSelectedSpecialty(id);
@@ -84,6 +92,7 @@ const SpecialtiesPage = () => {
                         type="text"
                         placeholder="Search doctors"
                         StartIcon={Search}
+                        value={searchParam}
                         onChange={(e) => setSearchParam(e.target.value)}
                         className="w-1/3 py-6 "
                     />
@@ -113,8 +122,8 @@ const SpecialtiesPage = () => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {doctors.map((item, idx) => (
-                            <TableRow key={idx}>
+                        {filteredSpecialties.map((item) => (
+                            <TableRow key={item.id}>
 
 
                                 <TableCell>

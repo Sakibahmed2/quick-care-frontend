@@ -14,7 +14,7 @@ const SpecialtyFormValidationSchema = z.object({
 })
 
 const EditSpecialtyModal = ({ isDialogOpen,
-    setIsDialogOpen, itemId }: TModalComponentsProps) => {
+    setIsDialogOpen }: TModalComponentsProps) => {
 
     const onSubmit = () => {
 
@@ -32,10 +32,6 @@ const EditSpecialtyModal = ({ isDialogOpen,
                 onSubmit={onSubmit}
                 defaultValues={{
                     name: "",
-                    email: "",
-                    password: "",
-                    specialty: "",
-                    location: "",
                 }}
                 resolver={zodResolver(SpecialtyFormValidationSchema)}
                 className="space-y-3"
