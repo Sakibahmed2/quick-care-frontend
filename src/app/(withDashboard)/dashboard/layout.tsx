@@ -17,7 +17,7 @@ const DashboardLayout = ({ children }: TChildren) => {
         </Link>
       </div>
 
-      <div className="flex ">
+      <div className="flex  ">
         <div className="w-1/6 fixed top-16 h-screen  z-40">
           <Sidebar />
         </div>

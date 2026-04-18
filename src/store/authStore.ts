@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 
 type TState = {
   token?: string;
@@ -20,20 +19,10 @@ const initialState: TState = {
   userId: undefined,
 };
 
-const authStore = create<
-  TState & TActions,
-  [["zustand/persist", TState & TActions]]
->(
-  persist<TState & TActions>(
-    (set) => ({
-      ...initialState,
-      setAuthToken: (token) => set(() => ({ token })),
-      removeAuthToken: () => set(() => ({ token: undefined })),
-    }),
-    {
-      name: "auth-storage",
-    }
-  )
-);
+const authStore = create<TState & TActions>((set) => ({
+  ...initialState,
+  setAuthToken: (token) => set(() => ({ token })),
+  removeAuthToken: () => set(() => ({ token: undefined })),
+}));
 
 export default authStore;

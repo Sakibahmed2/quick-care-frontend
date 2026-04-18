@@ -8,30 +8,28 @@ import { usePathname } from "next/navigation";
 const Sidebar = () => {
   const pathName = usePathname();
 
-  console.log(pathName)
-
   const matchPath = (path: string) => {
-    const currentSegments = pathName.split("/").filter(Boolean);
-    const targetSegments = path.split("/").filter(Boolean);
+    const normalizePath = (value: string) => value.replace(/\/+$/, "");
 
-    const currentLastTwo = currentSegments.slice(-2);
-    const targetLastTwo = targetSegments.slice(-2);
+    const currentPath = normalizePath(pathName);
+    const targetPath = normalizePath(`/dashboard/${path}`);
 
-    // check if any segment matches
-    return currentLastTwo.some(seg => targetLastTwo.includes(seg));
-  }
+    return currentPath === targetPath;
+  };
 
   return (
     <div className="bg-gray-50 border-r h-screen flex flex-col gap-2 pt-2">
-      {sidebarItems("admin").map((item, idx) => {
+      {sidebarItems("doctor").map((item, idx) => {
+
+
         return (
           <Link
             href={`/dashboard/${item.path}`}
             key={idx}
             className={cn(
-              "flex items-center py-2 px-4 mx-4 gap-6 cursor-pointer hover:bg-gray-200 text-sm rounded-md",
+              "flex items-center py-2 px-4 mx-2 gap-6 cursor-pointer hover:bg-gray-200 text-sm ",
               matchPath(item.path) &&
-              "text-primary bg-primary/10 "
+              "text-primary bg-primary/10 font-medium border-l-4 border-primary transition-all duration-100",
             )}
           >
             <div>{item.icon}</div>

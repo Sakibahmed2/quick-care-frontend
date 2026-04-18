@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
-import { baseApi } from '@/api/ApiBase'
+import { authApi } from '@/api/services/atuh.api'
 import QuickForm from '@/components/form/QuickForm'
 import QuickInput from '@/components/form/QuickInput'
 import { cn } from '@/lib/utils'
@@ -30,19 +30,19 @@ const LoginForm = () => {
   const { setAuthToken } = authStore()
 
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: { email: string; password: string }) => {
     const toastId = toast.loading('Logging in...')
     try {
 
-      const response = await baseApi.post('/auth', data)
+      const response = await authApi.loginUser(data)
 
-      if (response.statusText == 'OK') {
-        setAuthToken(response.data.data.accessToken)
+      if (response.success) {
+        setAuthToken(response.data.accessToken)
         toast.success('Login successful', { id: toastId })
       }
 
     } catch (err: any) {
-      toast.error(err.response?.data?.message || 'Something went wrong', { id: toastId })
+      toast.error(err.response?.data?.message || err.message || 'Something went wrong', { id: toastId })
     }
   }
 
