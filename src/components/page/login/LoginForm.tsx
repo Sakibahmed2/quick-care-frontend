@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
+import { queryKeys } from '@/api/queryKeys'
 import { authApi } from '@/api/services/atuh.api'
 import QuickForm from '@/components/form/QuickForm'
 import QuickInput from '@/components/form/QuickInput'
 import { cn } from '@/lib/utils'
 import authStore from '@/store/authStore'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useQueryClient } from '@tanstack/react-query'
 import { Eye, EyeOff } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import z from 'zod'
@@ -27,7 +30,9 @@ const formValidation = z.object({
 
 const LoginForm = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const { setAuthToken } = authStore()
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  const setAuthToken = authStore((state) => state.setAuthToken)
 
 
   const onSubmit = async (data: { email: string; password: string }) => {
@@ -38,6 +43,17 @@ const LoginForm = () => {
 
       if (response.success) {
         setAuthToken(response.data.accessToken)
+
+        const profile = await authApi.profile()
+
+        queryClient.setQueryData(queryKeys.auth.profile, profile)
+
+        if (profile.role === 'admin' || profile.role === 'doctor') {
+          router.push(`/dashboard/${profile.role}`)
+        } else {
+          router.push('/')
+        }
+
         toast.success('Login successful', { id: toastId })
       }
 

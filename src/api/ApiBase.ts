@@ -5,8 +5,12 @@ const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5000/api/v1";
 
 type TAuthApiResponse = {
+  statusCode: number;
+  success: boolean;
+  message: string;
   data?: {
     accessToken?: string;
+    refreshToken?: string;
   };
 };
 
@@ -108,9 +112,13 @@ baseApi.interceptors.response.use(
 );
 
 export const initializeAuthSession = async () => {
+  authStore.getState().setAuthInitialized(false);
+
   try {
     await getRefreshedAccessToken();
   } catch {
     authStore.getState().removeAuthToken();
+  } finally {
+    authStore.getState().setAuthInitialized(true);
   }
 };

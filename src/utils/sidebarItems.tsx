@@ -7,9 +7,18 @@ import {
   Hospital,
   House,
 } from "lucide-react";
+import { ReactNode } from "react";
 
-export const sidebarItems = (role: string) => {
-  const menus = [];
+export type TDashboardRole = "admin" | "doctor";
+
+type TSidebarItem = {
+  title: string;
+  icon: ReactNode;
+  path: string;
+};
+
+export const sidebarItems = (role: TDashboardRole): TSidebarItem[] => {
+  const menus: TSidebarItem[] = [];
 
   switch (role) {
     case "admin":
@@ -65,6 +74,10 @@ export const sidebarItems = (role: string) => {
           path: `${role}/patients`,
         }
       );
+      break;
+
+    default:
+      break;
   }
 
   return menus;

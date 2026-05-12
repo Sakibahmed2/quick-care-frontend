@@ -31,9 +31,7 @@ const extractDoctors = (
   return payload.data ?? payload.doctors ?? [];
 };
 
-export const getDoctors = async (
-  params?: TDoctorQueryParams,
-): Promise<TDoctor[]> => {
+const getDoctors = async (params?: TDoctorQueryParams): Promise<TDoctor[]> => {
   const res = await baseApi.get<TDoctor[] | TDoctorsApiResponse>("/doctors", {
     params,
   });
@@ -43,14 +41,29 @@ export const getDoctors = async (
 
 type TCreateDoctorPayload = {
   name: string;
+  img: string;
+  age: string;
+  gender: "Male" | " Female";
+  location: string;
+
+  email: string;
+  password: string;
+
   specialty: string;
-  fees?: number;
-  image?: string;
+  experience: string;
+  qualification: string;
+  fees: string;
+  designation: string;
 };
 
-export const createDoctor = async (
+const createDoctor = async (
   payload: TCreateDoctorPayload,
 ): Promise<TDoctor> => {
   const res = await baseApi.post<TDoctor>("/doctors", payload);
   return res.data;
+};
+
+export const doctorApi = {
+  getDoctors,
+  createDoctor,
 };

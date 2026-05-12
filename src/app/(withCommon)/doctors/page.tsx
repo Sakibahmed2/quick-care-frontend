@@ -9,6 +9,8 @@ import DoctorCard from "@/components/ui/DoctorCard";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import { doctorApi } from "@/api/services/doctor.api";
+import { useQuery } from "@tanstack/react-query";
 
 const doctors = [
   {
@@ -77,6 +79,13 @@ const specialties = [
 
 const DoctorsPage = () => {
   const [searchParam, setSearchParam] = useState("");
+
+  const { data } = useQuery({
+    queryKey: ["doctors", searchParam],
+    queryFn: () => doctorApi.getDoctors({ searchTerm: searchParam }),
+  })
+
+  console.log(data)
 
   return (
     <Container className="pt-20 pb-10 backdrop-blur-md">

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { cn } from "@/lib/utils";
@@ -7,11 +8,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import logo from "@/assets/logo.png";
+import { toast } from "sonner"
+import { authApi } from "@/api/services/atuh.api";
 
-type TLoginData = {
+type TRegisterData = {
   name: string;
   email: string;
   password: string;
+  phone: string;
 };
 
 const RegisterPage = () => {
@@ -21,16 +25,29 @@ const RegisterPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TLoginData>({
+  } = useForm<TRegisterData>({
     defaultValues: {
       name: "",
       email: "",
       password: "",
+      phone: "",
     },
   });
 
-  const onSubmit = (data: TLoginData) => {
-    void data;
+  const onSubmit = async (data: TRegisterData) => {
+    const toastId = toast.loading("Creating account...");
+    try {
+
+      const res = await authApi.registerUser(data)
+
+      if (res.success) {
+        toast.success("Account created successfully", { id: toastId });
+      }
+
+    } catch (err: any) {
+      toast.error("Failed to create account", { id: toastId });
+      console.log(err.message)
+    }
   };
 
   return (
@@ -61,6 +78,12 @@ const RegisterPage = () => {
               Full name
             </label>
             <input placeholder="Enter your name" {...register("name")} />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="phone" className="text-slate-500">
+              Phone number
+            </label>
+            <input placeholder="Enter your phone number" {...register("phone")} />
           </div>
 
           <div className="flex flex-col gap-1">
