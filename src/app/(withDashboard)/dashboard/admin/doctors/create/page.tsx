@@ -1,20 +1,24 @@
 "use client";
 
+import { useCreateDoctor } from "@/api/hooks/doctor.hook";
+import { TCreateDoctorPayload } from "@/api/services/doctor.api";
 import QuickForm from "@/components/form/QuickForm";
 import QuickInput from "@/components/form/QuickInput";
 import QuickSelect from "@/components/form/QuickSelect";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const formValidationSchema = z.object({
     // Personal
     name: z.string().min(1, { message: "Name is required" }),
     img: z.string().min(1, { message: "Image URL is required" }),
-    age: z.string().min(1, { message: "Age is required" }),
+    age: z.number().min(1, { message: "Age is required" }),
     gender: z.enum(["Male", "Female"]),
     location: z.string().min(1, { message: "Location is required" }),
+    phone: z.string().min(1, { message: "Phone number is required" }),
 
     // Auth
     email: z.string().email(),
@@ -22,15 +26,39 @@ const formValidationSchema = z.object({
 
     // Professional
     specialty: z.string().min(1),
-    experience: z.string().min(1),
+    experience: z.number().min(1),
     qualification: z.string().min(1),
-    fees: z.string().min(1),
-    designation: z.string().min(1),
+    fees: z.number().min(1),
 });
 
 const CreateDoctorPage = () => {
-    const onSubmit = (data: FieldValues) => {
-        console.log(data);
+
+    const createDoctorMutation = useCreateDoctor();
+
+    const onSubmit = async (data: FieldValues) => {
+        const toastId = toast.loading("Creating doctor...");
+        try {
+            const doctorData: TCreateDoctorPayload = {
+                name: data.name,
+                img: data.img,
+                age: data.age,
+                gender: data.gender,
+                location: data.location,
+                email: data.email,
+                password: data.password,
+                specialty: data.specialty,
+                experience: data.experience,
+                qualification: data.qualification,
+                fees: data.fees,
+                phone: data.phone
+            }
+            await createDoctorMutation.mutateAsync(doctorData);
+            toast.success("Doctor created successfully!", { id: toastId });
+
+        } catch (err) {
+            toast.error("Failed to create doctor.", { id: toastId });
+            console.log(err);
+        }
     };
 
     return (
@@ -48,18 +76,18 @@ const CreateDoctorPage = () => {
                 onSubmit={onSubmit}
                 resolver={zodResolver(formValidationSchema)}
                 defaultValues={{
-                    name: "",
-                    img: "",
-                    age: "",
-                    gender: "",
-                    location: "",
-                    email: "",
-                    password: "",
-                    specialty: "",
-                    experience: "",
-                    qualification: "",
-                    fees: "",
-                    designation: "",
+                    name: "Sakib Ahmed ",
+                    img: "https://media.istockphoto.com/id/1337144145/photo/portrait",
+                    age: 22,
+                    gender: "Male",
+                    location: "Dhaka",
+                    email: "sakib@gmail.com",
+                    password: "sakib123",
+                    specialty: "Cardiologist",
+                    experience: 4,
+                    qualification: "MBBS, FCPS",
+                    fees: 500,
+                    phone: "01712345678"
                 }}
                 className="space-y-6"
             >
@@ -67,10 +95,16 @@ const CreateDoctorPage = () => {
                 <div className="border rounded-xl p-5 shadow-sm space-y-4">
                     <h2 className="text-lg font-medium">Personal Information</h2>
 
-                    <QuickInput name="name" label="Full Name" placeholder="Dr. John Doe" />
+
+
 
                     <div className="grid grid-cols-2 gap-4">
-                        <QuickInput name="age" label="Age" placeholder="30" />
+                        <QuickInput name="name" label="Full Name" placeholder="Dr. John Doe" />
+                        <QuickInput name="age" label="Age" placeholder="30" type="number" />
+
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                        <QuickInput name="phone" label="Phone" placeholder="01712345678" />
                         <QuickSelect
                             name="gender"
                             label="Gender"
@@ -106,21 +140,24 @@ const CreateDoctorPage = () => {
                 <div className="border rounded-xl p-5 shadow-sm space-y-4">
                     <h2 className="text-lg font-medium">Professional Information</h2>
 
+
                     <div className="grid grid-cols-2 gap-4">
-                        <QuickInput name="specialty" label="Specialty" placeholder="Cardiologist" />
-                        <QuickInput name="designation" label="Designation" placeholder="Senior Doctor" />
+                        <QuickInput name="experience" label="Experience (years)" placeholder="5" type="number" />
+                        <QuickInput name="fees" label="Consultation Fee" placeholder="500" type="number" />
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <QuickInput name="experience" label="Experience (years)" placeholder="5" />
-                        <QuickInput name="fees" label="Consultation Fee" placeholder="500" />
+                        <QuickInput
+                            name="qualification"
+                            label="Qualification"
+                            placeholder="MBBS, FCPS"
+                        />
+                        <QuickInput
+                            name="specialty"
+                            label="Specialty"
+                            placeholder="Cardiologist"
+                        />
                     </div>
-
-                    <QuickInput
-                        name="qualification"
-                        label="Qualification"
-                        placeholder="MBBS, FCPS"
-                    />
                 </div>
 
                 {/* ================= ACTION ================= */}

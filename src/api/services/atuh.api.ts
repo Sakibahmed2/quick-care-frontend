@@ -48,6 +48,7 @@ const loginUser = async (
     "/auth",
     payload,
   );
+
   return res.data;
 };
 

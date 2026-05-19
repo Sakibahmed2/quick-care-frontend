@@ -1,5 +1,7 @@
 "use client";
 
+import { useGetDoctorSchedules } from "@/api/hooks/schedule.hook";
+import { TSchedule } from "@/api/services/schedule.api";
 import CreateScheduleModal from "@/components/dashboard/doctor/schedule/CreateScheduleModal";
 import { Badge } from "@/components/ui/badge";
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -53,6 +55,14 @@ const DoctorSchedulesPage = () => {
   const [searchParam, setSearchParam] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+  const { data, isLoading } = useGetDoctorSchedules();
+
+  console.log({ data })
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
 
   return (
     <div>
@@ -100,15 +110,15 @@ const DoctorSchedulesPage = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {doctorSchedules.map((item, idx) => (
+            {data?.map((item: TSchedule, idx: number) => (
               <TableRow key={idx}>
                 <TableCell>{item.date}</TableCell>
-                <TableCell>{item.startTime}</TableCell>
-                <TableCell>{item.endTime}</TableCell>
+                <TableCell>{item.start_time}</TableCell>
+                <TableCell>{item.end_time}</TableCell>
                 <TableCell>
                   <Badge
                     variant={
-                      item.status === "Available" ? "success" : "default"
+                      item.status === "available" ? "success" : "default"
                     }
                   >
                     {item.status}

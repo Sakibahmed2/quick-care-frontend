@@ -9,20 +9,16 @@ import { useMemo } from "react";
 
 const Sidebar = () => {
   const pathName = usePathname();
-  // const { profile, isAuthInitialized, isLoadingProfile } = useProfile();
+  const { profile, isAuthInitialized, isLoadingProfile } = useProfile();
 
-  // const role = profile?.role === "admin" || profile?.role === "doctor"
-  //   ? profile.role
-  //   : undefined;
+  const role = profile?.role === "admin" || profile?.role === "doctor"
+    ? profile.role
+    : undefined;
 
-  // const items = useMemo(() => {
-  //   return role ? sidebarItems(role) : [];
-  // }, [role]);
-
-  const isAuthInitialized = true;
   const items = useMemo(() => {
-    return sidebarItems("doctor");
-  }, []);
+    return role ? sidebarItems(role) : [];
+  }, [role]);
+
 
   const matchPath = (path: string) => {
     const normalizePath = (value: string) => value.replace(/\/+$/, "");
@@ -33,7 +29,7 @@ const Sidebar = () => {
     return currentPath === targetPath;
   };
 
-  if (!isAuthInitialized) {
+  if (!isAuthInitialized || isLoadingProfile) {
     return (
       <div className="bg-gray-50 border-r h-screen flex flex-col gap-2 pt-2 px-3">
         <div className="h-10 animate-pulse rounded bg-gray-200" />
