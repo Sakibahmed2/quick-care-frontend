@@ -6,9 +6,12 @@ import Link from "next/link";
 import { Badge } from "./badge";
 import { Card, CardContent, CardHeader } from "./card";
 import { Separator } from "./separator";
+import doctor1 from "@/assets/doctors/doctor1.png";
+
+
 
 const DoctorCard = ({ doctor }: { doctor: any }) => {
-  const { id, name, img, specialty, isAvailable } = doctor || {};
+  const { id, user, specialty, isAvailable } = doctor || {};
 
   return (
     <Link href={`/doctors/${id}`} passHref>
@@ -26,16 +29,18 @@ const DoctorCard = ({ doctor }: { doctor: any }) => {
             <AvatarFallback className="rounded-none">DR</AvatarFallback>
           </Avatar> */}
           <Image
-            src={img}
-            alt={name}
-            className=" h-[200px] w-[200px] flex justify-center items-center mx-auto "
+            src={doctor1}
+            alt={user?.name}
+            className=" flex justify-center items-center mx-auto "
+            width={200}
+            height={200}
           />
         </div>
 
         <CardHeader className="p-6 pb-2">
           <div className="flex justify-between items-start">
             <div>
-              <h3 className=" font-medium text-slate-800">{name}</h3>
+              <h3 className=" font-medium text-slate-800">{user.name}</h3>
               <p className="text-slate-500 text-xs">{specialty}</p>
             </div>
           </div>
