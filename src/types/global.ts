@@ -15,3 +15,11 @@ export type TModalComponentsProps = {
   setIsDialogOpen: (isOpen: boolean) => void;
   itemId?: string;
 };
+
+export type TTableQuery = {
+  page?: number;
+  limit?: number;
+  searchTerm?: string;
+  sortBy?: string;
+  sortOrder?: "asc" | "desc";
+};
