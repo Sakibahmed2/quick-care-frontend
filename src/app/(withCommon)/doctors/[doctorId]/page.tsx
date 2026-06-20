@@ -1,105 +1,11 @@
+import { doctorApi } from "@/api/services/doctor.api";
 import doctor1 from "@/assets/doctors/doctor1.png";
-import doctor2 from "@/assets/doctors/doctor2.png";
 import AppointmentCarousel from "@/components/page/Doctor/AppointmentCarousel";
 import { Badge } from "@/components/ui/badge";
 import Container from "@/components/ui/Container";
 import { Separator } from "@/components/ui/separator";
 import { Share2 } from "lucide-react";
 import Image from "next/image";
-
-const defaultServices = [
-  "Bacterial Vaginosis",
-  "Dysmenorrhea (Menstrual Disorder)",
-  "Embolization",
-  "Female Sexual Dysfunction",
-  "Gynae Problems",
-  "Hormone Disturbances",
-  "Hysteroscopy",
-  "Menorrhagia (Menstrual Disorder)",
-];
-
-const doctors = [
-  {
-    id: "1",
-    name: "Dr. Nargis Fatema",
-    img: doctor1,
-    credentials: "MBBS, FCPS, MS",
-    specialty: "Gynecologist & Obstetrician",
-    experience: "24 Years of Experience Overall",
-    registration: "BMDC Reg: Coming Soon",
-    doctorCode: "ID: D13RZ66",
-    hospitalName: "Square Hospitals Ltd",
-    hospitalAddress:
-      "18/F, Bir Uttam Qazi Nuruzzaman Sarak, Panthapath, 12, Dhanmondi, Dhaka-1205, Bangladesh",
-    availabilityDays: "Sat Sun Mon Tue Wed",
-    availabilityTime: "Thu 9:00 AM - 05:00 PM",
-    services: defaultServices,
-    about:
-      "Dr. Nargis Fatema is an Obstetrics & Gynaecology specialist in Dhaka. Her credentials include MBBS from Sir Salimullah Medical College, FCPS in Obstetrics & Gynaecology from BCPS, and MS (ObsGyn) from BSMMU. She previously served under the Ministry of Health and Family Welfare and worked at Dhaka Medical College Hospital and Sir Salimullah Medical College & Mitford Hospital. She received advanced training in laparoscopic surgery from BIRDEM and has participated in many national and international workshops, seminars, and symposiums. With 24 years of experience, she has special interest in high-risk pregnancy and laparoscopic surgery. She is currently working as a full-time consultant at Square Hospital since 2007. For appointments or additional information, please contact us at: 09611530530.",
-    fees: "$150",
-    isAvailable: true,
-  },
-  {
-    id: "2",
-    name: "Dr. Michael Johnson",
-    img: doctor2,
-    credentials: "MBBS, DDV",
-    specialty: "Dermatologist",
-    experience: "8 Years of Experience Overall",
-    registration: "BMDC Reg: Coming Soon",
-    doctorCode: "ID: D13RZ67",
-    hospitalName: "Square Hospitals Ltd",
-    hospitalAddress:
-      "18/F, Bir Uttam Qazi Nuruzzaman Sarak, Panthapath, 12, Dhanmondi, Dhaka-1205, Bangladesh",
-    availabilityDays: "Sat Sun Mon Tue Wed",
-    availabilityTime: "Thu 9:00 AM - 05:00 PM",
-    services: defaultServices,
-    about:
-      "Dr. Johnson has extensive experience in treating skin diseases and providing advanced dermatological care.",
-    fees: "$120",
-    isAvailable: false,
-  },
-  {
-    id: "3",
-    name: "Dr. Sarah Williams",
-    img: doctor2,
-    credentials: "MBBS, FCPS",
-    specialty: "Pediatrician",
-    experience: "12 Years of Experience Overall",
-    registration: "BMDC Reg: Coming Soon",
-    doctorCode: "ID: D13RZ68",
-    hospitalName: "Square Hospitals Ltd",
-    hospitalAddress:
-      "18/F, Bir Uttam Qazi Nuruzzaman Sarak, Panthapath, 12, Dhanmondi, Dhaka-1205, Bangladesh",
-    availabilityDays: "Sat Sun Mon Tue Wed",
-    availabilityTime: "Thu 9:00 AM - 05:00 PM",
-    services: defaultServices,
-    about:
-      "Dr. Williams is dedicated to providing exceptional healthcare to children of all ages.",
-    fees: "$100",
-    isAvailable: true,
-  },
-  {
-    id: "4",
-    name: "Dr. James Anderson",
-    img: doctor1,
-    credentials: "MBBS, MS",
-    specialty: "Orthopedic Surgeon",
-    experience: "15 Years of Experience Overall",
-    registration: "BMDC Reg: Coming Soon",
-    doctorCode: "ID: D13RZ69",
-    hospitalName: "Square Hospitals Ltd",
-    hospitalAddress:
-      "18/F, Bir Uttam Qazi Nuruzzaman Sarak, Panthapath, 12, Dhanmondi, Dhaka-1205, Bangladesh",
-    availabilityDays: "Sat Sun Mon Tue Wed",
-    availabilityTime: "Thu 9:00 AM - 05:00 PM",
-    services: defaultServices,
-    about:
-      "Dr. Anderson is a leading expert in treating bone and joint issues, ensuring patients recover quickly.",
-    fees: "$200",
-    isAvailable: true,
-  },
-];
 
 const SingleDoctorPage = async ({
   params,
@@ -108,23 +14,26 @@ const SingleDoctorPage = async ({
 }) => {
   const doctorId = (await params).doctorId;
 
-  const doctor = doctors.find((doctor) => doctor.id === doctorId);
+  const doctorInfo = await doctorApi.getDoctorInfo(doctorId);
 
-  if (!doctor) {
-    return <p>Doctor not found</p>;
-  }
+  // console.log(doctorInfo)
+
 
   const {
-    name,
-    img,
+    user,
     specialty,
     experience,
     about,
-    credentials,
-    registration,
-    doctorCode,
+    qualification,
+    fees,
+    location,
     services,
-  } = doctor;
+    schedules
+  } = doctorInfo;
+
+
+
+
 
   return (
     <Container className="mt-10 pt-10 w-full">
@@ -134,21 +43,23 @@ const SingleDoctorPage = async ({
             <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
               <div className="flex items-start gap-4">
                 <Image
-                  src={img}
+                  src={doctor1}
                   alt="doctor image"
                   className="h-24 w-24 rounded-lg bg-primary/10 object-cover p-2"
                 />
                 <div className="space-y-1">
                   <h2 className="text-xl md:text-2xl font-semibold text-slate-800">
-                    {name}
+                    {user?.name}
                   </h2>
-                  <p className="text-sm text-slate-500">{credentials}</p>
+                  <p className="text-sm text-slate-500">{qualification}</p>
                   <p className="text-sm text-slate-700">{specialty}</p>
                   <p className="text-sm font-medium text-primary">
-                    {experience}
+                    {experience} Years of Experience
                   </p>
-                  <p className="text-sm text-slate-500">{registration}</p>
-                  <p className="text-sm text-slate-500">{doctorCode}</p>
+                  <p className="text-sm text-slate-500">{location}</p>
+                  <p className="text-sm text-slate-500">
+                    Appointment Fee: <span className="font-semibold">${fees}</span>
+                  </p>
                 </div>
               </div>
 
@@ -160,7 +71,7 @@ const SingleDoctorPage = async ({
             <div>
               <p className="text-sm font-medium text-slate-700">Serves for:</p>
               <div className="mt-2 flex flex-wrap items-center gap-2">
-                {services.map((service) => (
+                {services.map((service: string) => (
                   <Badge
                     key={service}
                     variant="outline"
@@ -201,7 +112,7 @@ const SingleDoctorPage = async ({
             <h2 className="text-lg md:text-xl font-semibold text-slate-800">
               Booking a slot
             </h2>
-            <AppointmentCarousel />
+            <AppointmentCarousel schedules={schedules} />
           </div>
         </div>
       </div>

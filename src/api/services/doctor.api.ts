@@ -88,11 +88,11 @@ const createDoctor = async (
 };
 
 const getDoctorInfo = async (doctorId: string, signal?: AbortSignal) => {
-  const res = await baseApi.get<TDoctor>(`/doctors/info/${doctorId}`, {
+  const res = await baseApi.get(`/doctors/info/${doctorId}`, {
     signal,
   });
 
-  return res.data;
+  return res.data.data;
 };
 
 const updateDoctor = async (

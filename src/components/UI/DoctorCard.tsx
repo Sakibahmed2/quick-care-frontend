@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { cn } from "@/lib/utils";
 import { MapPin } from "lucide-react";
 import Image from "next/image";
@@ -7,11 +6,12 @@ import { Badge } from "./badge";
 import { Card, CardContent, CardHeader } from "./card";
 import { Separator } from "./separator";
 import doctor1 from "@/assets/doctors/doctor1.png";
+import { TDoctor } from "@/api/services/doctor.api";
 
 
 
-const DoctorCard = ({ doctor }: { doctor: any }) => {
-  const { id, user, specialty, isAvailable } = doctor || {};
+const DoctorCard = ({ doctor }: { doctor: TDoctor }) => {
+  const { id, user, specialty } = doctor || {};
 
   return (
     <Link href={`/doctors/${id}`} passHref>
@@ -30,7 +30,7 @@ const DoctorCard = ({ doctor }: { doctor: any }) => {
           </Avatar> */}
           <Image
             src={doctor1}
-            alt={user?.name}
+            alt={user?.name || "Doctor profile"}
             className=" flex justify-center items-center mx-auto "
             width={200}
             height={200}
@@ -40,7 +40,7 @@ const DoctorCard = ({ doctor }: { doctor: any }) => {
         <CardHeader className="p-6 pb-2">
           <div className="flex justify-between items-start">
             <div>
-              <h3 className=" font-medium text-slate-800">{user.name}</h3>
+              <h3 className=" font-medium text-slate-800">{user?.name}</h3>
               <p className="text-slate-500 text-xs">{specialty}</p>
             </div>
           </div>
@@ -59,7 +59,7 @@ const DoctorCard = ({ doctor }: { doctor: any }) => {
               className={cn(
                 "flex items-center gap-1",
 
-                isAvailable
+                user?.isActive
                   ? "bg-green-50 text-green-500 border-green-100 "
                   : "bg-red-50 text-red-500 border-red-100"
               )}
@@ -67,7 +67,7 @@ const DoctorCard = ({ doctor }: { doctor: any }) => {
               <span
                 className={cn(
                   "h-2 w-2 rounded-full ",
-                  isAvailable ? "bg-green-500" : "bg-red-500"
+                  user?.isActive ? "bg-green-500" : "bg-red-500"
                 )}
               ></span>
               Available
